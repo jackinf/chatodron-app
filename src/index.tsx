@@ -1,10 +1,11 @@
 import ReactDOM from 'react-dom';
 import * as React from 'react';
 import {Provider} from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router'
 
 import * as serviceWorker from './serviceWorker';
-import createStore, {history} from './store';
+import configureStore, { history } from './configureStore';
 import AppComponent from './app/App.component';
 import {start} from './app/actions';
 import './index.css';
@@ -14,28 +15,20 @@ import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 // @ts-ignore
-export const store = createStore(window['__INITIAL_STATE__']);
+export const store = configureStore(window['__INITIAL_STATE__']);
 store.dispatch<any>(start());
 
 class IndexComponent extends React.Component<any> {
   render() {
     return (
       <Provider store={store}>
-        <Router>
-          <div>
+        <ConnectedRouter history={history}>
+          <>
             <Switch>
               <Route path="/" component={AppComponent}/>
             </Switch>
-          </div>
-        </Router>
-        {/*<div>*/}
-          {/*test*/}
-        {/*</div>*/}
-        {/*<ConnectedRouter history={history}>*/}
-          {/*<Switch>*/}
-            {/*<Route path="/" component={AppComponent}/>*/}
-          {/*</Switch>*/}
-        {/*</ConnectedRouter>*/}
+          </>
+        </ConnectedRouter>
       </Provider>
     )
   }
