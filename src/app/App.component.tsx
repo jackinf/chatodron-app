@@ -27,6 +27,15 @@ const RestrictedRoute = ({component: Component, ...rest}: any) =>
     />
   );
 
+const Main = () => (
+  <div className={`app-container`}>
+    <TemtHeader />
+    MAIN
+    {/* todo: define application routes here */}
+    <Footer/>
+  </div>
+);
+
 export interface AppComponentStateProps {
   loading: boolean;
   error?: ErrorWrapper;
@@ -50,13 +59,7 @@ class AppComponent extends React.Component<AppComponentStateProps & AppComponent
         <div className={`app-main ${!isLoggedIn ? '' : ''}`}>
           <Switch>
             {isLoggedIn
-              ? <RestrictedRoute path={`/`} isLoggedIn={isLoggedIn} component={() => (
-                <div className={`app-container`}>
-                  <TemtHeader />
-                  {/* todo: define application routes here */}
-                  <Footer/>
-                </div>
-              )                }/>
+              ? <RestrictedRoute path={`/`} isLoggedIn={isLoggedIn} component={Main}/>
               : <Route path={'*'} component={asyncComponent(async () => await import('./routes/Login'))}/>}
           </Switch>
 

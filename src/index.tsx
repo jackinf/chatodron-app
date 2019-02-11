@@ -1,8 +1,7 @@
 import ReactDOM from 'react-dom';
 import * as React from 'react';
-import {ConnectedRouter} from 'react-router-redux';
 import {Provider} from 'react-redux';
-import {Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import * as serviceWorker from './serviceWorker';
 import createStore, {history} from './store';
@@ -22,11 +21,21 @@ class IndexComponent extends React.Component<any> {
   render() {
     return (
       <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <Switch>
-            <Route path="/" component={AppComponent}/>
-          </Switch>
-        </ConnectedRouter>
+        <Router>
+          <div>
+            <Switch>
+              <Route path="/" component={AppComponent}/>
+            </Switch>
+          </div>
+        </Router>
+        {/*<div>*/}
+          {/*test*/}
+        {/*</div>*/}
+        {/*<ConnectedRouter history={history}>*/}
+          {/*<Switch>*/}
+            {/*<Route path="/" component={AppComponent}/>*/}
+          {/*</Switch>*/}
+        {/*</ConnectedRouter>*/}
       </Provider>
     )
   }
