@@ -60,7 +60,7 @@ class AppComponent extends React.Component<AppComponentStateProps & AppComponent
           <Switch>
             {isLoggedIn
               ? <RestrictedRoute path={`/`} isLoggedIn={isLoggedIn} component={Main}/>
-              : <Route path={'*'} component={asyncComponent(async () => await import('./routes/Login'))}/>}
+              : <Route path={'*'} component={asyncComponent(async () => await import('./routes/Auth'))}/>}
           </Switch>
 
           <ReduxToastr
