@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router'
 
 import * as serviceWorker from './serviceWorker';
-import configureStore, { history } from './configureStore';
+import configureStore, { history } from './createAppStore';
 import AppComponent from './app/App.component';
 import {start} from './app/actions';
 import './index.css';

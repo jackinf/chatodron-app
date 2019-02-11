@@ -1,21 +1,19 @@
 import { applyMiddleware, compose, createStore, Reducer, Store } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-// import {routerMiddleware} from 'react-router-redux';
 import { createBrowserHistory } from 'history';
 import { routerMiddleware } from 'connected-react-router';
 
-import createReducer from "./reducers";
+import combineAppReducers from "./combineAppReducers";
 
 export const history = createBrowserHistory();
 
-// const routeMiddleware = routerMiddleware(history);
 const routeMiddleware = routerMiddleware(history);
 const middlewares = [routeMiddleware, thunkMiddleware];
 
 const __DEV__ = true; // TODO: get development mode from environments
 const asyncReducers: any = { b: () => 2 };
 
-export default function configureStore(initialState: any = {}) { // TODO: use typedef
+export default function createAppStore(initialState: any = {}) { // TODO: use typedef
 
   // ======================================================
   // Store Enhancers
@@ -34,7 +32,7 @@ export default function configureStore(initialState: any = {}) { // TODO: use ty
   // Store Instantiation
   // ======================================================
   const store = createStore(
-    createReducer(asyncReducers, history),
+    combineAppReducers(asyncReducers, history),
     initialState,
     compose(
       applyMiddleware(...middlewares),
@@ -46,5 +44,5 @@ export default function configureStore(initialState: any = {}) { // TODO: use ty
 
 export function injectAsyncReducer(store: Store<any>, name: string, asyncReducer: Reducer<any>) { // TODO: Fix anys
   asyncReducers[name] = asyncReducer;
-  store.replaceReducer(createReducer(asyncReducers, history));
+  store.replaceReducer(combineAppReducers(asyncReducers, history));
 }
