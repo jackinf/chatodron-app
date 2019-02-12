@@ -3,6 +3,7 @@ import {MuiThemeProvider} from 'material-ui/styles';
 import {Redirect, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ReduxToastr from "react-redux-toastr";
+import {Switch} from "react-router";
 
 import TemtHeader from '../components/Header';
 import Footer from '../components/Footer';
@@ -11,9 +12,8 @@ import {AppReduxState, REDUCER_NAME__APP} from "./App.reducer";
 import {routePaths} from "../constants/api.constants";
 import asyncComponent from "../helpers/AsyncComponent";
 import {ErrorWrapper} from "../viewModels/base";
-import {Switch} from "react-router";
-import {injectAsyncReducer} from "../createAppStore";
-import {store} from "../index";
+import RoomsRoutes from "./routes/Rooms";
+import RoomRoutes from "./routes/Room";
 
 const RestrictedRoute = ({component: Component, ...rest}: any) =>
   (
@@ -33,13 +33,10 @@ const Main = () => (
   <div className={`app-container`}>
     <TemtHeader />
     <h2>Chatodron</h2>
-    <Route exact={true} path={'/rooms'}
-       component={asyncComponent(async () => {
-         const reducer = await import('./routes/Rooms/Rooms.reducer');
-         injectAsyncReducer(store, reducer.REDUCER_NAME__ROOMS, reducer.default);
-         return await import('./routes/Rooms/Rooms.component');
-       })}
-    />
+
+    <RoomsRoutes />
+    <RoomRoutes />
+
     <Footer/>
   </div>
 );

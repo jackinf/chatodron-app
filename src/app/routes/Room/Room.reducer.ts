@@ -2,7 +2,6 @@ import { Action } from 'redux';
 import { isType } from 'typescript-fsa';
 import {
   cancel as createCancel,
-  startActions as createStartActions,
   submitActions as createSubmitActions
 } from './actions/Room.create-single.actions';
 import {
@@ -27,15 +26,6 @@ export default (state: RoomReduxState = defaultState, action: Action): RoomRedux
 
   // Create actions
   if (isType(action, createCancel)) {
-    return {...state, type: action.type, loading: false};
-  }
-  if (isType(action, createStartActions.started)) {
-    return {...state, type: action.type, loading: true};
-  }
-  if (isType(action, createStartActions.done)) {
-    return { type: action.type, loading: false, ...defaultState };
-  }
-  if (isType(action, createStartActions.failed)) {
     return {...state, type: action.type, loading: false};
   }
   if (isType(action, createSubmitActions.started)) {

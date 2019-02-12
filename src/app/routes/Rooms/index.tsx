@@ -1,1 +1,1 @@
-export { default } from "./Rooms.component";
+export { default } from "./routes.component";
