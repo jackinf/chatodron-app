@@ -12,6 +12,8 @@ import {routePaths} from "../constants/api.constants";
 import asyncComponent from "../helpers/AsyncComponent";
 import {ErrorWrapper} from "../viewModels/base";
 import {Switch} from "react-router";
+import {injectAsyncReducer} from "../createAppStore";
+import {store} from "../index";
 
 const RestrictedRoute = ({component: Component, ...rest}: any) =>
   (
@@ -30,8 +32,14 @@ const RestrictedRoute = ({component: Component, ...rest}: any) =>
 const Main = () => (
   <div className={`app-container`}>
     <TemtHeader />
-    MAIN
-    {/* todo: define application routes here */}
+    <h2>Chatodron</h2>
+    <Route exact={true} path={'/rooms'}
+       component={asyncComponent(async () => {
+         const reducer = await import('./routes/Rooms/Rooms.reducer');
+         injectAsyncReducer(store, reducer.REDUCER_NAME__ROOMS, reducer.default);
+         return await import('./routes/Rooms/Rooms.component');
+       })}
+    />
     <Footer/>
   </div>
 );
