@@ -3,32 +3,23 @@ import { Dispatch } from 'redux';
 import { toastr } from 'react-redux-toastr';
 
 import CommonUtilities from '../../../../helpers/CommonUtilities';
-import { ErrorWrapper, SpeysPagination, TableData } from '../../../../viewModels/base';
-import RoomsResponseViewModel from "../viewModels/RoomsResponseViewModel";
-import RoomsApi from "./Rooms.api";
-import { REDUCER_NAME__ROOMS } from "../Rooms.reducer";
-import TableFormattingUtilities from "../../../../helpers/TableFormattingUtilities";
+import { ErrorWrapper } from '../../../../viewModels/base';
+import RoomApi from "../../../apis/Room.api";
 
 const actionCreator = actionCreatorFactory();
 export const asyncActions = actionCreator.async<
   {},
-  {tableData: TableData<RoomsResponseViewModel>},
+  {tableData: any},
   ErrorWrapper
-  >('COMPANIES/FETCH');
+  >('ROOMS/FETCH');
 
-export default function submit(paginationParams: SpeysPagination | null): any {
-  return async (dispatch: Dispatch<{}>, getState: Function) => {
+export default function submit(): any {
+  return async (dispatch: Dispatch<any>, getState: Function) => {
 
     async function mainAction() {
       dispatch(asyncActions.started({}));
 
-      paginationParams = paginationParams || SpeysPagination.getDefault();
-      const paginatedList = await RoomsApi.getList({...paginationParams});
-      const tableData = TableData.createTableDataFrom(
-        paginatedList,
-        paginationParams.page,
-        paginationParams.sizePerPage
-      );
+      const tableData = await RoomApi.getList();
       dispatch(asyncActions.done({ params: {}, result: {tableData} }));
     }
 
@@ -40,21 +31,4 @@ export default function submit(paginationParams: SpeysPagination | null): any {
 
     await CommonUtilities.tryCatchWrapper(mainAction, catchAction);
   };
-}
-
-
-//
-// Sorting and pagination
-//
-
-export function onSortChange(sortName: string, sortOrder: SortOrder) {
-  return TableFormattingUtilities.getOnSortChangeAction(submit, REDUCER_NAME__ROOMS, sortName, sortOrder);
-}
-
-export function onPageChange(page: number, sizePerPage: number) {
-  return TableFormattingUtilities.getOnPageChangeAction(submit, REDUCER_NAME__ROOMS, page, sizePerPage);
-}
-
-export function onSizePerPageList(sizePerPage: number) {
-  return TableFormattingUtilities.getOnSizePerPageList(submit, REDUCER_NAME__ROOMS, sizePerPage);
 }

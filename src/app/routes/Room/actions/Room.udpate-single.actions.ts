@@ -3,9 +3,9 @@ import { Dispatch } from 'redux';
 import { toastr } from 'react-redux-toastr';
 import { initialize } from "redux-form";
 
-import { ErrorWrapper, NotFoundErrorWrapper } from '../../../../viewModels/base';
+import { ErrorWrapper } from '../../../../viewModels/base';
 import CommonUtilities from "../../../../helpers/CommonUtilities";
-import RoomApi from "./Room.api";
+import RoomApi from "../../../apis/Room.api";
 import { roomFormName } from "../Room.edit-component";
 import { RoomReduxState, REDUCER_NAME__ROOM } from "../Room.reducer";
 
@@ -20,21 +20,20 @@ export const cancel = actionCreator<{}>('ROOM/EDIT/CANCEL');
 /*
     START
  */
-export const startActions = actionCreator.async<{}, {id: number}, ErrorWrapper>('ROOM/EDIT/START');
+export const startActions = actionCreator.async<{}, {id: string}, ErrorWrapper>('ROOM/EDIT/START');
 
-export function start(id: number) {
-  return async (dispatch: Dispatch<{}>, getState: Function) => {
+export function start(id: string) {
+  return async (dispatch: Dispatch<any>, getState: Function) => {
 
     // TODO: to functional programming
     async function mainAction() {
       dispatch(startActions.started({}));
       const item = await RoomApi.getSingle(id);
       if (!item) {
-        throw new NotFoundErrorWrapper(`Item with Id ${id} not found`);
+        throw new ErrorWrapper(`Item with Id ${id} not found`);
       }
       dispatch(initialize(roomFormName, item));
       dispatch(startActions.done({ params: {}, result: {id} }));
-      // TODO: on success
     }
 
     async function catchAction(exception: ErrorWrapper) {
@@ -53,7 +52,7 @@ export function start(id: number) {
 export const submitActions = actionCreator.async<{}, {}, ErrorWrapper>('ROOM/EDIT/SUBMIT');
 
 export function submit(onSuccess: Function) {
-  return async (dispatch: Dispatch<{}>, getState: Function) => {
+  return async (dispatch: Dispatch<any>, getState: Function) => {
 
     async function mainAction() {
       dispatch(submitActions.started({}));

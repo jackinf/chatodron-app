@@ -1,8 +1,7 @@
 import { Action } from 'redux';
 import { isType } from 'typescript-fsa';
 import { asyncActions as FetchActions } from './actions/Rooms.get-list.actions';
-import { ErrorWrapper, TableData } from "../../../viewModels/base";
-import RoomsResponseViewModel from "./viewModels/RoomsResponseViewModel";
+import { ErrorWrapper } from "../../../viewModels/base";
 import {
   cancel as deleteCancel,
   startActions as deleteStartActions,
@@ -15,13 +14,13 @@ export interface RoomsReduxState {
   type?: string;
   loading: boolean;
   error?: ErrorWrapper | null;
-  tableData: TableData<RoomsResponseViewModel>;
-  pendingDeleteId: number | undefined;
+  tableData: any;
+  pendingDeleteId: string | undefined;
   confirmLoading: boolean;
 }
 const defaultState: RoomsReduxState = {
   loading: false,
-  tableData: TableData.getDefault<RoomsResponseViewModel>(),
+  tableData: {},
   pendingDeleteId: undefined,
   confirmLoading: false
 };

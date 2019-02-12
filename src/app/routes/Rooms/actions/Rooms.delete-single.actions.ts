@@ -2,10 +2,10 @@ import actionCreatorFactory from 'typescript-fsa';
 import { Dispatch } from 'redux';
 import { toastr } from 'react-redux-toastr';
 
-import { ErrorWrapper, NotFoundErrorWrapper } from '../../../../viewModels/base';
+import { ErrorWrapper } from '../../../../viewModels/base';
 import CommonUtilities from "../../../../helpers/CommonUtilities";
 import { RoomsReduxState, REDUCER_NAME__ROOMS } from "../Rooms.reducer";
-import RoomsApi from "./Rooms.api";
+import RoomApi from "../../../apis/Room.api";
 
 const actionCreator = actionCreatorFactory();
 
@@ -18,16 +18,16 @@ export const cancel = actionCreator<{}>('ROOMS/DELETE/CANCEL');
 /*
     START
  */
-export const startActions = actionCreator.async<{}, {id: number}, ErrorWrapper>('ROOMS/DELETE/START');
+export const startActions = actionCreator.async<{}, {id: string}, ErrorWrapper>('ROOMS/DELETE/START');
 
-export function start(id: number) {
-  return async (dispatch: Dispatch<{}>) => {
+export function start(id: string) {
+  return async (dispatch: Dispatch<any>) => {
 
     async function mainAction() {
       dispatch(startActions.started({}));
-      const item = await RoomsApi.getSingle(id);
+      const item = await RoomApi.getSingle(id);
       if (!item) {
-        throw new NotFoundErrorWrapper(`Item with Id ${id} not found`);
+        throw new ErrorWrapper(`Item with Id ${id} not found`);
       }
       dispatch(startActions.done({ params: {}, result: {id} }));
     }
@@ -48,7 +48,7 @@ export function start(id: number) {
 export const submitActions = actionCreator.async<{}, {}, ErrorWrapper>('ROOMS/DELETE/SUBMIT');
 
 export function submit(onSuccess: Function) {
-  return async (dispatch: Dispatch<{}>, getState: Function) => {
+  return async (dispatch: Dispatch<any>, getState: Function) => {
 
     async function mainAction() {
       dispatch(submitActions.started({}));
@@ -59,7 +59,7 @@ export function submit(onSuccess: Function) {
         throw new ErrorWrapper('Id is missing');
       }
 
-      await RoomsApi.remove(currentState.pendingDeleteId);
+      await RoomApi.remove(currentState.pendingDeleteId);
       dispatch(submitActions.done({ params: {}, result: {} }));
       toastr.success('Success', 'Item was successfully deleted');
       if (onSuccess) {

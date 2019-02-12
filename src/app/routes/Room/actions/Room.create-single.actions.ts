@@ -5,7 +5,7 @@ import { toastr } from 'react-redux-toastr';
 import { ErrorWrapper } from '../../../../viewModels/base';
 import CommonUtilities from "../../../../helpers/CommonUtilities";
 import { roomFormName } from "../Room.create-component";
-import RoomsApi from "./Room.api";
+import RoomsApi from "../../../apis/Room.api";
 
 const actionCreator = actionCreatorFactory();
 
@@ -13,15 +13,15 @@ const actionCreator = actionCreatorFactory();
     CANCEL
  */
 
-export const cancel = actionCreator<{}>('COMPANY/CREATE/CANCEL');
+export const cancel = actionCreator<{}>('ROOM/CREATE/CANCEL');
 
 /*
     START
  */
-export const startActions = actionCreator.async<{}, {}, ErrorWrapper>('COMPANY/CREATE/START');
+export const startActions = actionCreator.async<{}, {}, ErrorWrapper>('ROOM/CREATE/START');
 
 export function start() {
-  return async (dispatch: Dispatch<{}>, getState: Function) => {
+  return async (dispatch: Dispatch<any>, getState: Function) => {
 
     async function mainAction() {
       dispatch(startActions.started({}));
@@ -41,10 +41,10 @@ export function start() {
 /*
     SUBMIT
  */
-export const submitActions = actionCreator.async<{}, {}, ErrorWrapper>('COMPANY/CREATE/SUBMIT');
+export const submitActions = actionCreator.async<{}, {}, ErrorWrapper>('ROOM/CREATE/SUBMIT');
 
 export function submit(onSuccess: Function) {
-  return async (dispatch: Dispatch<{}>, getState: Function) => {
+  return async (dispatch: Dispatch<any>, getState: Function) => {
 
     async function mainAction() {
       dispatch(submitActions.started({}));

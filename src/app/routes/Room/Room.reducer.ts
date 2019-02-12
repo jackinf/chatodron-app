@@ -10,14 +10,14 @@ import {
   startActions as editStartActions,
   submitActions as editSubmitActions
 } from './actions/Room.udpate-single.actions';
-import { ErrorWrapper } from "../../../viewModels";
+import { ErrorWrapper } from "../../../viewModels/base";
 
 export const REDUCER_NAME__ROOM = 'room';
 
 export interface RoomReduxState {
   type?: string;
   errorWrapper?: ErrorWrapper;
-  id?: number;
+  id?: string;
   loading: boolean;
 }
 const defaultState: RoomReduxState = {
