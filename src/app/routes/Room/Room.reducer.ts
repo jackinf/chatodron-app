@@ -17,6 +17,7 @@ export interface RoomReduxState {
   type?: string;
   errorWrapper?: ErrorWrapper;
   id?: string;
+  item?: any;
   loading: boolean;
 }
 const defaultState: RoomReduxState = {
@@ -46,7 +47,8 @@ export default (state: RoomReduxState = defaultState, action: Action): RoomRedux
     return {...state, type: action.type, loading: true};
   }
   if (isType(action, editStartActions.done)) {
-    return {type: action.type, loading: false, id: action.payload.result.id, ...defaultState};
+    const { id, item } = action.payload.result;
+    return {type: action.type, loading: false, id, item, ...defaultState};
   }
   if (isType(action, editStartActions.failed)) {
     return {...state, type: action.type, loading: false, errorWrapper: action.payload.error};

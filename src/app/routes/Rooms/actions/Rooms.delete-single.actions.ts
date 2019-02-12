@@ -47,19 +47,13 @@ export function start(id: string) {
  */
 export const submitActions = actionCreator.async<{}, {}, ErrorWrapper>('ROOMS/DELETE/SUBMIT');
 
-export function submit(onSuccess: Function) {
+export function submit(id: string, onSuccess: Function) {
   return async (dispatch: Dispatch<any>, getState: Function) => {
 
     async function mainAction() {
       dispatch(submitActions.started({}));
-      const state = getState();
 
-      const currentState: RoomsReduxState = state[REDUCER_NAME__ROOMS];
-      if (!currentState.pendingDeleteId) {
-        throw new ErrorWrapper('Id is missing');
-      }
-
-      await RoomApi.remove(currentState.pendingDeleteId);
+      await RoomApi.remove(id);
       dispatch(submitActions.done({ params: {}, result: {} }));
       toastr.success('Success', 'Item was successfully deleted');
       if (onSuccess) {

@@ -1,7 +1,7 @@
 import actionCreatorFactory from 'typescript-fsa';
 import { Dispatch } from 'redux';
 import { toastr } from 'react-redux-toastr';
-import { initialize } from "redux-form";
+// import { initialize } from "redux-form";
 
 import { ErrorWrapper } from '../../../../viewModels/base';
 import CommonUtilities from "../../../../helpers/CommonUtilities";
@@ -20,7 +20,7 @@ export const cancel = actionCreator<{}>('ROOM/EDIT/CANCEL');
 /*
     START
  */
-export const startActions = actionCreator.async<{}, {id: string}, ErrorWrapper>('ROOM/EDIT/START');
+export const startActions = actionCreator.async<{}, {id: string, item: any}, ErrorWrapper>('ROOM/EDIT/START');
 
 export function start(id: string) {
   return async (dispatch: Dispatch<any>, getState: Function) => {
@@ -32,8 +32,8 @@ export function start(id: string) {
       if (!item) {
         throw new ErrorWrapper(`Item with Id ${id} not found`);
       }
-      dispatch(initialize(roomFormName, item));
-      dispatch(startActions.done({ params: {}, result: {id} }));
+      // dispatch(initialize(roomFormName, item));
+      dispatch(startActions.done({ params: {}, result: {id, item} }));
     }
 
     async function catchAction(exception: ErrorWrapper) {
@@ -51,21 +51,15 @@ export function start(id: string) {
  */
 export const submitActions = actionCreator.async<{}, {}, ErrorWrapper>('ROOM/EDIT/SUBMIT');
 
-export function submit(onSuccess: Function) {
+export function submit(id: string, formValues: any, onSuccess: Function) {
   return async (dispatch: Dispatch<any>, getState: Function) => {
 
     async function mainAction() {
       dispatch(submitActions.started({}));
-      const state = getState();
-      const currentState: RoomReduxState = state[REDUCER_NAME__ROOM];
-      let formValues = state.form[roomFormName].values || {};
       if (!formValues) {
         throw new ErrorWrapper('Nothing was filled');
       }
-      if (!currentState.id) {
-        throw new ErrorWrapper('Id is missing');
-      }
-      await RoomApi.update(currentState.id, formValues);
+      await RoomApi.update(id, formValues);
       dispatch(submitActions.done({ params: {}, result: {} }));
       toastr.success('Success', 'Item was successfully updated');
       if (onSuccess) {

@@ -6,12 +6,12 @@ import {store} from "../../../index";
 
 export default () => (
   <Switch>
-    <Route exact={true} path={'/room/new'} component={AsyncComponent(async () => {
+    <Route exact={true} path={'/rooms/new'} component={AsyncComponent(async () => {
       const reducer = await import('./Room.reducer');
       injectAsyncReducer(store, reducer.REDUCER_NAME__ROOM, reducer.default);
       return await import('./Room.create-component');
     })}/>
-    <Route path={'/room/:id'} component={AsyncComponent(async () => {
+    <Route path={'/rooms/:id'} component={AsyncComponent(async () => {
       const reducer = await import('./Room.reducer');
       injectAsyncReducer(store, reducer.REDUCER_NAME__ROOM, reducer.default);
       return await import('./Room.edit-component');

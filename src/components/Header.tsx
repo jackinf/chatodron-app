@@ -9,7 +9,7 @@ class TemtHeader extends React.Component<any, any> {
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/rooms">Rooms</Link></li>
-          <li><Link to="/room/new">Create new room</Link></li>
+          <li><Link to="/rooms/new">Create new room</Link></li>
         </ul>
       </div>
     );
