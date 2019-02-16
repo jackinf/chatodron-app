@@ -14,6 +14,7 @@ import asyncComponent from "../helpers/AsyncComponent";
 import {ErrorWrapper} from "../viewModels/base";
 import RoomsRoutes from "./routes/Rooms";
 import RoomRoutes from "./routes/Room";
+import DemoRoutes from "./routes/Demo";
 import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/styles/withStyles";
 import {Theme} from "@material-ui/core";
 
@@ -51,6 +52,7 @@ const Main = withStyles((theme: Theme): StyleRules => ({
     <span className={classes && classes.mainWrapper}>
       <RoomsRoutes />
       <RoomRoutes />
+      <DemoRoutes />
     </span>
     <span className={classes && classes.footerWrapper}>
       <Footer/>

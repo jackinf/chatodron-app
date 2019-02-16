@@ -27,12 +27,12 @@ class Footer extends React.Component<StyledComponentProps & RouteComponentProps<
         >
           <BottomNavigationAction label="Home" icon={<RestoreIcon />} onClick={() => this.props.history.push("/")} />
           <BottomNavigationAction label="Rooms" icon={<FavoriteIcon />} onClick={() => this.props.history.push("/rooms")} />
-          <BottomNavigationAction label="Settings" icon={<LocationOnIcon />} onClick={() => this.props.history.push("/settings")} />
+          <BottomNavigationAction label="Demos" icon={<LocationOnIcon />} onClick={() => this.props.history.push("/demo")} />
         </BottomNavigation>
       </footer>
     )
   }
-};
+}
 
 export default withStyles((theme: Theme): StyleRules => ({
   footer: {
