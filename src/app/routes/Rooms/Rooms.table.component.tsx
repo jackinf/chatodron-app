@@ -152,8 +152,8 @@ class RoomsTable extends React.Component<RoomsTableProps & RouteComponentProps<a
 
   handleOpenMenu = (event: any) => this.setState({ actionMenuEl: event.currentTarget });
   handleCloseMenu = () => this.setState({ actionMenuEl: undefined });
-  viewItem = (id: string) => this.props.history.push(`/goals/${id}`);
-  editItem = (id: string) => this.props.history.push(`/goals/${id}/edit`);
+  viewItem = (id: string) => this.props.history.push(`/rooms/${id}`); // todo: to constants; todo: dispatch route change
+  editItem = (id: string) => this.props.history.push(`/rooms/${id}/edit`); // todo: to constants; todo: dispatch route change
   startDelete = (deletePendingItemId: string) => {
     this.handleCloseMenu();
     this.setState({ deletePendingItemId })

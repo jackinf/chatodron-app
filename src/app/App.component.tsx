@@ -14,6 +14,8 @@ import asyncComponent from "../helpers/AsyncComponent";
 import {ErrorWrapper} from "../viewModels/base";
 import RoomsRoutes from "./routes/Rooms";
 import RoomRoutes from "./routes/Room";
+import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/styles/withStyles";
+import {Theme} from "@material-ui/core";
 
 const RestrictedRoute = ({component: Component, ...rest}: any) =>
   (
@@ -29,17 +31,32 @@ const RestrictedRoute = ({component: Component, ...rest}: any) =>
     />
   );
 
-const Main = () => (
-  <div className={`app-container`}>
+const Main = withStyles((theme: Theme): StyleRules => ({
+  wrapper: {
+    display: "flex",
+    minHeight: "100vh",
+    flexDirection: "column"
+  },
+
+  mainWrapper: {
+    flex: 1
+  },
+
+  footerWrapper: {
+    height: theme.spacing.unit * 7
+  }
+}))(({ classes }: StyledComponentProps) => (
+  <div className={classes && classes.wrapper}>
     <TemtHeader />
-    <h2>Chatodron</h2>
-
-    <RoomsRoutes />
-    <RoomRoutes />
-
-    <Footer/>
+    <span className={classes && classes.mainWrapper}>
+      <RoomsRoutes />
+      <RoomRoutes />
+    </span>
+    <span className={classes && classes.footerWrapper}>
+      <Footer/>
+    </span>
   </div>
-);
+));
 
 export interface AppComponentStateProps {
   loading: boolean;
