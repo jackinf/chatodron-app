@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {RouteComponentProps} from "react-router";
+import FormGroup from '@material-ui/core/FormGroup';
 
 import {
   start,
@@ -8,6 +9,9 @@ import {
 } from './actions/Room.udpate-single.actions';
 import {REDUCER_NAME__ROOM} from "./Room.reducer";
 import {withRouter} from "react-router";
+import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/styles/withStyles";
+import {TextField, Theme} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 export const roomFormName = "room-edit-form";
 
@@ -20,26 +24,40 @@ const mapDispatchToProps = { start, submit };
 interface RoomUpdateProps { start: Function, submit: Function, loading: boolean, item?: any }
 export interface RoomUpdateState { name: string }
 
-class RoomEdit extends Component<RoomUpdateProps & RouteComponentProps<{ id: string }>, RoomUpdateState> {
+class RoomEdit extends Component<RoomUpdateProps & RouteComponentProps<{ id: string }> & StyledComponentProps, RoomUpdateState> {
   async componentDidMount() {
-    await this.props.start(this.props.match.params.id);
+    await this.load();
   }
 
+  load = async () => await this.props.start(this.props.match.params.id);
+  handleUpdate = () => this.props.submit(this.props.match.params.id, {...this.state}, async () => { await this.load(); });
+
   render() {
-    const { submit, loading, item } = this.props;
-    const id = this.props.match.params.id;
+    const { loading, item, classes } = this.props;
 
     if (loading || !item) {
       return <div>Loading</div>
     }
 
     return (
-      <div>
-        Room Edit form goes here
+      <form className={classes && classes.container} noValidate autoComplete="off">
+        <FormGroup row={true}>
+          <TextField
+            required
+            id="outlined-required"
+            label="Name"
+            defaultValue={item.name}
+            className={classes && classes.textField}
+            margin="normal"
+            onChange={e => this.setState({ name: e.target.value })}
+            variant="outlined"
+          />
+        </FormGroup>
 
-        <input defaultValue={item.name} type="text" onChange={e => this.setState({ name: e.target.value })}/>
-        <button onClick={() => submit(id, this.state, () => { console.info("updated"); })}>Update</button>
-      </div>
+        <Button variant="outlined" color="primary" className={classes && classes.button} onClick={this.handleUpdate}>
+          Update
+        </Button>
+      </form>
     );
   }
 }
@@ -47,4 +65,11 @@ class RoomEdit extends Component<RoomUpdateProps & RouteComponentProps<{ id: str
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(RoomEdit));
+)(withStyles((theme: Theme): StyleRules => ({
+  container: {
+    margin: theme.spacing.unit * 2
+  },
+  button: {
+    margin: theme.spacing.unit
+  },
+}))(withRouter(RoomEdit)));
