@@ -18,9 +18,8 @@ function initSockets(server) {
   io.on('connection', (socket) => {
     // console.log('socket', socket);
 
-    socket.on('ENTER_ROOM', function (data) {
-      socket.join(data.room);
-    });
+    socket.on('ENTER_ROOM', data => socket.join(data.room));
+    socket.on('LEAVE_ROOM', data => socket.leave(data.room, undefined));
 
     socket.on('SEND_MESSAGE', function(data) {
       // console.log('data', data);
@@ -29,9 +28,9 @@ function initSockets(server) {
       }
     });
 
-    socket.on('disconnect', function () {
-      // console.log('disconnect', io.sockets.adapter.rooms);
-      io.emit('user disconnected');
-    });
+    // socket.on('disconnect', function () {
+    //   // console.log('disconnect', io.sockets.adapter.rooms);
+    //   io.emit('user disconnected');
+    // });
   });
 }

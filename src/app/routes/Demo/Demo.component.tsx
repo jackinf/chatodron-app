@@ -1,7 +1,6 @@
 import * as React from 'react';
 import io from "socket.io-client";
 
-const socket = io('localhost:4000');
 const id = Math.random();
 
 class Demo extends React.Component {
@@ -15,20 +14,21 @@ class Demo extends React.Component {
 
   setRoom = () => {
     this.setState({ room: this.state.tempRoom });
-    socket.emit('ENTER_ROOM', {
+    this.socket.emit('ENTER_ROOM', {
       room: this.state.tempRoom,
     });
   };
 
   sendMessage = (ev: any) => {
     ev.preventDefault();
-    socket.emit('SEND_MESSAGE', {
+    this.socket.emit('SEND_MESSAGE', {
       room: this.state.room,
       author: id,
       message: this.state.message
     });
     this.setState({message: ''});
   };
+  private socket: SocketIOClient.Socket;
 
   constructor(props: any) {
     super(props);
@@ -39,9 +39,18 @@ class Demo extends React.Component {
       console.log(this.state.messages);
     };
 
-    socket.on('RECEIVE_MESSAGE', function(data: any){
+    this.socket = io('localhost:4000');
+    this.socket.on('RECEIVE_MESSAGE', function(data: any){
       addMessage(data);
     });
+  }
+
+  componentWillUnmount(): void {
+    if (this.state.room) {
+      this.socket.emit('LEAVE_ROOM', {
+        room: this.state.room,
+      });
+    }
   }
 
   render() {
