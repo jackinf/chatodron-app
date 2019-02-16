@@ -1,6 +1,9 @@
+const socket = require('socket.io');
+
 exports.init = function init() {
   initDatabaseConnection();
 };
+exports.initSockets = initSockets;
 
 function initDatabaseConnection() {
   const mongoose = require('mongoose');
@@ -8,4 +11,27 @@ function initDatabaseConnection() {
   mongoose.Promise = global.Promise;
   let db = mongoose.connection;
   db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+}
+
+function initSockets(server) {
+  const io = socket(server);
+  io.on('connection', (socket) => {
+    // console.log('socket', socket);
+
+    socket.on('ENTER_ROOM', function (data) {
+      socket.join(data.room);
+    });
+
+    socket.on('SEND_MESSAGE', function(data) {
+      // console.log('data', data);
+      if (data.room) {
+        io.to(data.room).emit('RECEIVE_MESSAGE', data);
+      }
+    });
+
+    socket.on('disconnect', function () {
+      // console.log('disconnect', io.sockets.adapter.rooms);
+      io.emit('user disconnected');
+    });
+  });
 }

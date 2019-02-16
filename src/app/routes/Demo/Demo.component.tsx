@@ -8,12 +8,22 @@ class Demo extends React.Component {
   state = {
     username: '',
     message: '',
+    tempRoom: '',
+    room: '',
     messages: []
+  };
+
+  setRoom = () => {
+    this.setState({ room: this.state.tempRoom });
+    socket.emit('ENTER_ROOM', {
+      room: this.state.tempRoom,
+    });
   };
 
   sendMessage = (ev: any) => {
     ev.preventDefault();
     socket.emit('SEND_MESSAGE', {
+      room: this.state.room,
       author: id,
       message: this.state.message
     });
@@ -35,6 +45,17 @@ class Demo extends React.Component {
   }
 
   render() {
+    if (!this.state.room) {
+      return (
+        <div>
+          Set room name:
+          <input type="text" placeholder="Room" className="form-control"
+                 value={this.state.tempRoom} onChange={ev => this.setState({tempRoom: ev.target.value})}/>
+          <button onClick={this.setRoom} className="btn btn-primary form-control">Send</button>
+        </div>
+      )
+    }
+
     return (
       <div>
         Chat room
@@ -46,6 +67,7 @@ class Demo extends React.Component {
             )
           })}
         </div>
+
 
         <input type="text" placeholder="Message" className="form-control"
                value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/>
