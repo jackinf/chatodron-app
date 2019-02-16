@@ -21,7 +21,7 @@ export default function createAppStore(initialState: any = {}) { // TODO: use ty
   const windowIfDefined = typeof window === 'undefined' ? null : window as any;
   const enhancers: any[] = [];
   if (__DEV__) {
-    const devToolsExtension: any = windowIfDefined && windowIfDefined.devToolsExtension;
+    const devToolsExtension: any = windowIfDefined && windowIfDefined.__REDUX_DEVTOOLS_EXTENSION__;
     if (typeof devToolsExtension === 'function') {
       const ext: any = devToolsExtension({shouldHotReload: false});
       enhancers.push(ext); // correct fix to avoid toastr endless popup
