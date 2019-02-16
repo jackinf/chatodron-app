@@ -23,7 +23,7 @@ export const cancel = actionCreator<{}>('ROOM/EDIT/CANCEL');
  */
 export const startActions = actionCreator.async<{}, {id: string, item: any}, ErrorWrapper>('ROOM/EDIT/START');
 
-export function start(id: string) {
+export function start(id: string, onSuccess: Function) {
   return async (dispatch: Dispatch<any>, getState: Function) => {
 
     // TODO: to functional programming
@@ -35,6 +35,7 @@ export function start(id: string) {
       }
       // dispatch(initialize(roomFormName, item));
       dispatch(startActions.done({ params: {}, result: {id, item} }));
+      onSuccess && onSuccess(item.name);
     }
 
     async function catchAction(exception: ErrorWrapper) {

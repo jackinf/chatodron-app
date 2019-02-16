@@ -28,6 +28,7 @@ class RoomView extends Component<RoomUpdateProps & RouteComponentProps<{ id: str
   }
 
   load = async () => await this.props.start(this.props.match.params.id);
+  goToChatPage = () => this.props.history.push(`/rooms/${this.props.match.params.id}/chat`);
   goToUpdatePage = () => this.props.history.push(`/rooms/${this.props.match.params.id}/edit`);
 
   render() {
@@ -53,6 +54,9 @@ class RoomView extends Component<RoomUpdateProps & RouteComponentProps<{ id: str
           />
         </FormGroup>
 
+        <Button variant="outlined" color="primary" className={classes && classes.button} onClick={this.goToChatPage}>
+          Start chatting
+        </Button>
         <Button variant="outlined" color="primary" className={classes && classes.button} onClick={this.goToUpdatePage}>
           Start editing
         </Button>

@@ -21,5 +21,10 @@ export default () => (
       injectAsyncReducer(store, reducer.REDUCER_NAME__ROOM, reducer.default);
       return await import('./Room.edit-component');
     })}/>
+    <Route path={'/rooms/:id/chat'} component={AsyncComponent(async () => {
+      const reducer = await import('./Room.reducer');
+      injectAsyncReducer(store, reducer.REDUCER_NAME__ROOM, reducer.default);
+      return await import('./Room.chat-component');
+    })}/>
   </Switch>
 );

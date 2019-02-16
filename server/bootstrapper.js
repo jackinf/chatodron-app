@@ -16,21 +16,24 @@ function initDatabaseConnection() {
 function initSockets(server) {
   const io = socket(server);
   io.on('connection', (socket) => {
-    // console.log('socket', socket);
+    socket.on('ENTER_ROOM', data => {
+      socket.join(data.room);
+      // console.log(`${socket.id} joined room ${data.room}`)
+    });
 
-    socket.on('ENTER_ROOM', data => socket.join(data.room));
-    socket.on('LEAVE_ROOM', data => socket.leave(data.room, undefined));
+    socket.on('LEAVE_ROOM', data => {
+      socket.leave(data.room, undefined);
+      // console.log(`${socket.id} left room ${data.room}`)
+    });
 
     socket.on('SEND_MESSAGE', function(data) {
-      // console.log('data', data);
       if (data.room) {
-        io.to(data.room).emit('RECEIVE_MESSAGE', data);
+        io.to(data.room).emit('RECEIVE_MESSAGE', { ...data, author: socket.id });
       }
     });
 
-    // socket.on('disconnect', function () {
-    //   // console.log('disconnect', io.sockets.adapter.rooms);
-    //   io.emit('user disconnected');
-    // });
+    socket.on('disconnect', function () {
+      console.log('disconnected');
+    });
   });
 }
