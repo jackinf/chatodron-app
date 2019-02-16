@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {MuiThemeProvider} from 'material-ui/styles';
+// import {MuiThemeProvider} from '@material-ui/core/styles';
 import {Redirect, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ReduxToastr from "react-redux-toastr";
@@ -60,25 +60,23 @@ class AppComponent extends React.Component<AppComponentStateProps & AppComponent
     }
 
     return (
-      <MuiThemeProvider>
-        <div className={`app-main ${!isLoggedIn ? '' : ''}`}>
-          <Switch>
-            {isLoggedIn
-              ? <RestrictedRoute path={`/`} isLoggedIn={isLoggedIn} component={Main}/>
-              : <Route path={'*'} component={asyncComponent(async () => await import('./routes/Auth'))}/>}
-          </Switch>
+      <div className={`app-main ${!isLoggedIn ? '' : ''}`}>
+        <Switch>
+          {isLoggedIn
+            ? <RestrictedRoute path={`/`} isLoggedIn={isLoggedIn} component={Main}/>
+            : <Route path={'*'} component={asyncComponent(async () => await import('./routes/Auth'))}/>}
+        </Switch>
 
-          <ReduxToastr
-            timeOut={4000}
-            newestOnTop={false}
-            preventDuplicates={true}
-            position="top-center"
-            transitionIn="bounceInDown"
-            transitionOut="bounceOutUp"
-            progressBar={true}
-          />
-        </div>
-      </MuiThemeProvider>
+        <ReduxToastr
+          timeOut={4000}
+          newestOnTop={false}
+          preventDuplicates={true}
+          position="top-center"
+          transitionIn="bounceInDown"
+          transitionOut="bounceOutUp"
+          progressBar={true}
+        />
+      </div>
     );
   }
 }

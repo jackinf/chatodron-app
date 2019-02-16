@@ -5,7 +5,7 @@ import { toastr } from 'react-redux-toastr';
 import { ErrorWrapper } from '../../../../viewModels/base';
 import CommonUtilities from "../../../../helpers/CommonUtilities";
 import {RoomCreateState, roomFormName} from "../Room.create-component";
-import RoomsApi from "../../../apis/Room.api";
+import RoomsApi, {RoomApiAddPayload} from "../../../apis/Room.api";
 
 const actionCreator = actionCreatorFactory();
 
@@ -33,7 +33,7 @@ export default function submit(formValues: RoomCreateState, onSuccess: Function)
       if (!formValues) {
         throw new ErrorWrapper('Nothing was filled');
       }
-      await RoomsApi.add(formValues);
+      await RoomsApi.add(new RoomApiAddPayload(formValues.name));
       dispatch(submitActions.done({ params: {}, result: {} }));
       toastr.success('Success', 'Item was successfully created');
       if (onSuccess) {

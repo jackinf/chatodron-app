@@ -5,9 +5,10 @@ import { toastr } from 'react-redux-toastr';
 
 import { ErrorWrapper } from '../../../../viewModels/base';
 import CommonUtilities from "../../../../helpers/CommonUtilities";
-import RoomApi from "../../../apis/Room.api";
-import { roomFormName } from "../Room.edit-component";
-import { RoomReduxState, REDUCER_NAME__ROOM } from "../Room.reducer";
+import RoomApi, {RoomApiUpdatePayload} from "../../../apis/Room.api";
+import {roomFormName, RoomUpdateState} from "../Room.edit-component";
+// import { RoomReduxState, REDUCER_NAME__ROOM } from "../Room.reducer";
+// import {RoomCreateState} from "../Room.create-component";
 
 const actionCreator = actionCreatorFactory();
 
@@ -51,15 +52,15 @@ export function start(id: string) {
  */
 export const submitActions = actionCreator.async<{}, {}, ErrorWrapper>('ROOM/EDIT/SUBMIT');
 
-export function submit(id: string, formValues: any, onSuccess: Function) {
-  return async (dispatch: Dispatch<any>, getState: Function) => {
+export function submit(id: string, formValues: RoomUpdateState, onSuccess: Function) {
+  return async (dispatch: Dispatch<any>) => {
 
     async function mainAction() {
       dispatch(submitActions.started({}));
       if (!formValues) {
         throw new ErrorWrapper('Nothing was filled');
       }
-      await RoomApi.update(id, formValues);
+      await RoomApi.update(new RoomApiUpdatePayload(id, formValues.name));
       dispatch(submitActions.done({ params: {}, result: {} }));
       toastr.success('Success', 'Item was successfully updated');
       if (onSuccess) {
