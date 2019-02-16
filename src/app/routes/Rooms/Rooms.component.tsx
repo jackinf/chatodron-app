@@ -24,24 +24,15 @@ const mapDispatchToProps = { getList, remove };
 
 const styles = (theme: Theme): StyleRules => ({
   wrapper: {
-    // display: "flex",
-    // minHeight: "100vh",
-    // flexDirection: "column"
   },
 
   main: {
-    // flex: 1
   },
 
   addButton: {
     position: "fixed",
     bottom: theme.spacing.unit * 15,
     right: theme.spacing.unit * 2,
-
-    // marginLeft: 'auto',
-    // marginRight: theme.spacing.unit * 2,
-    // marginBottom: theme.spacing.unit * 2,
-    // marginTop: theme.spacing.unit * 2
   },
 });
 

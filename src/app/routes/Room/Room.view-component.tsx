@@ -13,25 +13,22 @@ import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/st
 import {TextField, Theme} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
-export const roomFormName = "room-edit-form";
-
 function mapStateToProps(state: any) {
   const { loading, item } = state[REDUCER_NAME__ROOM];
   return { loading, item };
 }
 const mapDispatchToProps = { start, submit };
 
-interface RoomUpdateProps { start: Function, submit: Function, loading: boolean, item?: any }
+interface RoomUpdateProps { start: Function, loading: boolean, item?: any }
 export interface RoomUpdateState { name: string }
 
-class RoomEdit extends Component<RoomUpdateProps & RouteComponentProps<{ id: string }> & StyledComponentProps, RoomUpdateState> {
+class RoomView extends Component<RoomUpdateProps & RouteComponentProps<{ id: string }> & StyledComponentProps, RoomUpdateState> {
   async componentDidMount() {
     await this.load();
   }
 
   load = async () => await this.props.start(this.props.match.params.id);
-  goToViewPage = () => this.props.history.push(`/rooms/${this.props.match.params.id}`);
-  handleUpdate = () => this.props.submit(this.props.match.params.id, {...this.state}, async () => { await this.goToViewPage(); });
+  goToUpdatePage = () => this.props.history.push(`/rooms/${this.props.match.params.id}/edit`);
 
   render() {
     const { loading, item, classes } = this.props;
@@ -48,6 +45,7 @@ class RoomEdit extends Component<RoomUpdateProps & RouteComponentProps<{ id: str
             id="outlined-required"
             label="Name"
             defaultValue={item.name}
+            disabled={true}
             className={classes && classes.textField}
             margin="normal"
             onChange={e => this.setState({ name: e.target.value })}
@@ -55,11 +53,8 @@ class RoomEdit extends Component<RoomUpdateProps & RouteComponentProps<{ id: str
           />
         </FormGroup>
 
-        <Button variant="outlined" color="primary" className={classes && classes.button} onClick={this.goToViewPage}>
-          Back
-        </Button>
-        <Button variant="outlined" color="secondary" className={classes && classes.button} onClick={this.handleUpdate}>
-          Update
+        <Button variant="outlined" color="primary" className={classes && classes.button} onClick={this.goToUpdatePage}>
+          Start editing
         </Button>
       </form>
     );
@@ -76,4 +71,4 @@ export default connect(
   button: {
     margin: theme.spacing.unit
   },
-}))(withRouter(RoomEdit)));
+}))(withRouter(RoomView)));

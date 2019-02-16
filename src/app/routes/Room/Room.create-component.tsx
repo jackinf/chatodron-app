@@ -47,7 +47,7 @@ class RoomCreate extends Component<RoomCreateProps & StyledComponentProps & Rout
           />
         </FormGroup>
 
-        <Button variant="outlined" color="primary" className={classes && classes.button} onClick={this.handleAdd}>
+        <Button variant="outlined" color="secondary" className={classes && classes.button} onClick={this.handleAdd}>
           Add
         </Button>
       </form>

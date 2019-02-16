@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eece35b0-6893-4bab-bec5-53a5f62d2e98" name="Default Changelist" comment="frontend: rooms: action items and delete modal">
+    <list default="true" id="eece35b0-6893-4bab-bec5-53a5f62d2e98" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/routes/Room/Room.view-component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/App.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/App.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/routes/Room/Room.create-component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/routes/Room/Room.create-component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/routes/Room/Room.edit-component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/routes/Room/Room.edit-component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/routes/Room/routes.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/routes/Room/routes.component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/routes/Rooms/Rooms.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/routes/Rooms/Rooms.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/routes/Rooms/Rooms.table.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/routes/Rooms/Rooms.table.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -23,11 +22,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/routes/Rooms/Rooms.component.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="28" selection-end-column="30" />
+            <state relative-caret-position="-437">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/routes/Room/Room.edit-component.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="60" column="51" selection-start-line="60" selection-start-column="42" selection-end-line="60" selection-end-column="51" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/routes/Room/Room.view-component.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="55" column="49" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="49" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/routes/Room/routes.component.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="18" column="33" lean-forward="true" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/routes/Room/Room.create-component.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -48,37 +95,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Header.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/BottomNavigation/BottomNavigation.d.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="11" column="31" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/routes/Rooms/Rooms.table.component.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="21" column="52" lean-forward="true" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/routes/Room/routes.component.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+            <state relative-caret-position="76">
+              <caret line="155" column="37" lean-forward="true" selection-start-line="155" selection-start-column="29" selection-end-line="155" selection-end-column="73" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -102,7 +122,7 @@
         <entry file="file://$PROJECT_DIR$/node_modules/@types/react-router/index.d.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="264">
-              <caret line="136" column="44" lean-forward="true" selection-start-line="136" selection-start-column="37" selection-end-line="136" selection-end-column="61" />
+              <caret line="136" column="43" selection-start-line="136" selection-start-column="37" selection-end-line="136" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -110,17 +130,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/styles/withStyles.d.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="61" column="31" lean-forward="true" selection-start-line="61" selection-start-column="31" selection-end-line="61" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/index.d.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="70" column="12" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="12" />
+            <state relative-caret-position="800">
+              <caret line="54" column="37" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -165,7 +176,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Index.component.tsx" />
         <option value="$PROJECT_DIR$/src/app/actions/index.ts" />
         <option value="$PROJECT_DIR$/src/viewModels/base.ts" />
         <option value="$PROJECT_DIR$/src/helpers/CommonUtilities.ts" />
@@ -199,9 +209,7 @@
         <option value="$PROJECT_DIR$/src/app/routes/Room/RoomRoutes.component.tsx" />
         <option value="$PROJECT_DIR$/src/app/routes/Rooms/routes.component.tsx" />
         <option value="$PROJECT_DIR$/src/app/routes/Rooms/index.tsx" />
-        <option value="$PROJECT_DIR$/src/app/routes/Room/Room.create-component.tsx" />
         <option value="$PROJECT_DIR$/src/app/routes/Room/Room.reducer.ts" />
-        <option value="$PROJECT_DIR$/src/app/routes/Room/Room.edit-component.tsx" />
         <option value="$PROJECT_DIR$/src/app/types/Room.type.ts" />
         <option value="$PROJECT_DIR$/src/app/routes/Rooms/actions/Rooms.types.ts" />
         <option value="$PROJECT_DIR$/src/app/routes/Rooms/actions/Rooms.get-list.actions.ts" />
@@ -210,12 +218,15 @@
         <option value="$PROJECT_DIR$/src/app/apis/Room.api.ts" />
         <option value="$PROJECT_DIR$/src/app/types/Pagination.type.ts" />
         <option value="$PROJECT_DIR$/src/app/routes/Rooms/actions/Rooms.delete-single.actions.ts" />
-        <option value="$PROJECT_DIR$/src/app/routes/Room/routes.component.tsx" />
         <option value="$PROJECT_DIR$/src/app/routes/Rooms/Rooms.table.component.tsx" />
         <option value="$PROJECT_DIR$/src/components/Header.tsx" />
         <option value="$PROJECT_DIR$/src/components/Footer.tsx" />
         <option value="$PROJECT_DIR$/src/app/App.component.tsx" />
         <option value="$PROJECT_DIR$/src/app/routes/Rooms/Rooms.component.tsx" />
+        <option value="$PROJECT_DIR$/src/app/routes/Room/routes.component.tsx" />
+        <option value="$PROJECT_DIR$/src/app/routes/Room/Room.edit-component.tsx" />
+        <option value="$PROJECT_DIR$/src/app/routes/Room/Room.create-component.tsx" />
+        <option value="$PROJECT_DIR$/src/app/routes/Room/Room.view-component.tsx" />
       </list>
     </option>
   </component>
@@ -279,15 +290,6 @@
               <item name="chatodron-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="chatodron-app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="Rooms" type="462c0819:PsiDirectoryNode" />
-              <item name="actions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chatodron-app" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chatodron-app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -313,6 +315,9 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/routes/Room" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/app/apis" />
       <recent name="$PROJECT_DIR$/src/app/routes/Room/actions" />
@@ -346,7 +351,7 @@
       <workItem from="1549621761630" duration="8746000" />
       <workItem from="1549961288136" duration="11634000" />
       <workItem from="1550245528218" duration="2357000" />
-      <workItem from="1550314134620" duration="9152000" />
+      <workItem from="1550314134620" duration="10979000" />
     </task>
     <task id="LOCAL-00001" summary="init: initial typescript setup">
       <created>1549575051638</created>
@@ -446,11 +451,25 @@
       <option name="project" value="LOCAL" />
       <updated>1550319776687</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="frontend: rooms: styling">
+      <created>1550323571354</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1550323571354</updated>
+    </task>
+    <task id="LOCAL-00016" summary="frontend: rooms: styling create and edit">
+      <created>1550324890138</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1550324890138</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36998000" />
+    <option name="totallyTimeSpent" value="38825000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="811" extended-state="6" />
@@ -522,10 +541,11 @@
     <MESSAGE value="frontend: rooms: udpating and deleting" />
     <MESSAGE value="frontend: rooms: pagination is now working" />
     <MESSAGE value="frontend: rooms: action items and delete modal" />
-    <option name="LAST_COMMIT_MESSAGE" value="frontend: rooms: action items and delete modal" />
+    <MESSAGE value="frontend: rooms: styling" />
+    <MESSAGE value="frontend: rooms: styling create and edit" />
+    <option name="LAST_COMMIT_MESSAGE" value="frontend: rooms: styling create and edit" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/master" />
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -666,16 +686,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/routes/Room/Room.edit-component.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="42" column="6" selection-start-line="42" selection-start-column="6" selection-end-line="42" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -824,26 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/routes/Room/Room.create-component.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/routes/Room/routes.component.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/BottomNavigation/BottomNavigation.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -858,31 +848,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/routes/Rooms/Rooms.table.component.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="21" column="52" lean-forward="true" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/styles/withStyles.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="61" column="31" lean-forward="true" selection-start-line="61" selection-start-column="31" selection-end-line="61" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Header.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/react-router/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="136" column="44" lean-forward="true" selection-start-line="136" selection-start-column="37" selection-end-line="136" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -906,10 +875,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/styles/withStyles.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="800">
+          <caret line="54" column="37" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/react-router/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="136" column="43" selection-start-line="136" selection-start-column="37" selection-end-line="136" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/routes/Rooms/Rooms.table.component.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="155" column="37" lean-forward="true" selection-start-line="155" selection-start-column="29" selection-end-line="155" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/routes/Rooms/Rooms.component.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="28" selection-end-column="30" />
+        <state relative-caret-position="-437">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/routes/Room/routes.component.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="18" column="33" lean-forward="true" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/routes/Room/Room.edit-component.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="60" column="51" selection-start-line="60" selection-start-column="42" selection-end-line="60" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/routes/Room/Room.create-component.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/routes/Room/Room.view-component.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="55" column="49" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="49" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
