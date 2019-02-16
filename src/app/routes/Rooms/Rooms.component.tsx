@@ -32,20 +32,12 @@ class Rooms extends Component<RoomsProps> {
         Rooms table goes here
         <RoomsTable
           getList={getList}
+          confirmDelete={remove}
           page={tableData.page}
           limit={tableData.limit}
           docs={tableData.docs}
           total={tableData.total}
         />
-
-        {/*<ul>*/}
-          {/*{!loading && tableData.docs && tableData.docs.map((doc: any, i: number) => (*/}
-            {/*<li key={i}>*/}
-              {/*<Link to={`rooms/${doc._id}`}>{doc.name}</Link> &nbsp;*/}
-              {/*<a href="" onClick={() => remove(doc._id, async () => { await this.props.getList(); })}>X</a>*/}
-            {/*</li>*/}
-          {/*))}*/}
-        {/*</ul>*/}
       </div>
     );
   }

@@ -20,6 +20,7 @@ export const cancel = actionCreator<{}>('ROOMS/DELETE/CANCEL');
  */
 export const startActions = actionCreator.async<{}, {id: string}, ErrorWrapper>('ROOMS/DELETE/START');
 
+// todo: delete
 export function start(id: string) {
   return async (dispatch: Dispatch<any>) => {
 

@@ -13,9 +13,23 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import {TablePaginationActionsProps} from "@material-ui/core/TablePagination/TablePaginationActions";
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import ViewIcon from '@material-ui/icons/Visibility';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import TableHead from "@material-ui/core/TableHead";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import {RouteComponentProps, withRouter} from "react-router-dom";
+import Button from '@material-ui/core/Button';
 
 import {RoomType} from "../../types/Room.type";
-import TableHead from "@material-ui/core/TableHead";
+const ITEM_HEIGHT = 48; // todo: to constants
 
 const actionsStyles = (theme: Theme): StyleRules => ({
   root: {
@@ -107,10 +121,16 @@ interface RoomsTableProps {
   docs: Array<RoomType>;
   limit: number;
   page: number;
-  getList: Function;
   total: number;
+
+  getList: Function;
+  confirmDelete: Function;
 }
-class RoomsTable extends React.Component<RoomsTableProps> {
+interface RoomsTableState {
+  actionMenuEl?: HTMLElement;
+  deletePendingItemId?: string;
+}
+class RoomsTable extends React.Component<RoomsTableProps & RouteComponentProps<any>, RoomsTableState> {
   static defaultProps = {
     docs: [],
     limit: 10, // todo: extract from here
@@ -119,13 +139,31 @@ class RoomsTable extends React.Component<RoomsTableProps> {
   };
 
   handleChangePage = async (event: any, page: number) => {
-    console.info('handleChangePage', page);
     await this.props.getList({ page: page+1, limit: this.props.limit });
   };
 
   handleChangeRowsPerPage = async (event: any) => {
     await this.props.getList({ page: this.props.page, limit: event.target.value });
   };
+
+  refreshTable = async () => {
+    await this.props.getList({ page: this.props.page, limit: this.props.limit });
+  };
+
+  handleOpenMenu = (event: any) => this.setState({ actionMenuEl: event.currentTarget });
+  handleCloseMenu = () => this.setState({ actionMenuEl: undefined });
+  viewItem = (id: string) => this.props.history.push(`/goals/${id}`);
+  editItem = (id: string) => this.props.history.push(`/goals/${id}/edit`);
+  startDelete = (deletePendingItemId: string) => {
+    this.handleCloseMenu();
+    this.setState({ deletePendingItemId })
+  };
+  cancelDelete = () => this.setState({ deletePendingItemId: undefined });
+  confirmDelete = () => this.props.confirmDelete(this.state.deletePendingItemId, async () => {
+    this.cancelDelete();
+    await this.refreshTable();
+  });
+  isDeletePending = () => !!this.state && !!this.state.deletePendingItemId;
 
   render() {
     const { classes, docs, limit, page, total } = this.props;
@@ -145,16 +183,55 @@ class RoomsTable extends React.Component<RoomsTableProps> {
               </TableRow>
             </TableHead>
             <TableBody>
-              {docs.map(row => (
-                <TableRow key={row._id}>
-                  <TableCell component="td" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell component="td" scope="row">
+              {docs.map((row: RoomType) => {
+                const actionMenuEl = this.state && this.state.actionMenuEl;
+                const menuButtonId = `menu-button-${row._id}`;
+                const open = Boolean(actionMenuEl && actionMenuEl.id === menuButtonId);
 
-                  </TableCell>
-                </TableRow>
-              ))}
+                return (
+                  <TableRow key={row._id}>
+                    <TableCell component="td" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell component="td" scope="row">
+                      <IconButton
+                        id={menuButtonId}
+                        aria-label="More"
+                        aria-owns={open ? 'long-menu' : undefined}
+                        aria-haspopup="true"
+                        onClick={this.handleOpenMenu}
+                      >
+                        <MoreVertIcon/>
+                      </IconButton>
+                      <Menu
+                        id={menuButtonId}
+                        anchorEl={actionMenuEl}
+                        open={open}
+                        onClose={this.handleCloseMenu}
+                        PaperProps={{
+                          style: {
+                            maxHeight: ITEM_HEIGHT * 4.5,
+                            width: 200,
+                          },
+                        }}
+                      >
+                        <MenuItem onClick={() => this.viewItem(row._id)}>
+                          <ViewIcon className={classes.icon}/> &nbsp;
+                          View
+                        </MenuItem>
+                        <MenuItem onClick={() => this.editItem(row._id)}>
+                          <EditIcon className={classes.icon}/> &nbsp;
+                          Edit
+                        </MenuItem>
+                        <MenuItem onClick={() => this.startDelete(row._id)}>
+                          <DeleteIcon className={classes.icon}/> &nbsp;
+                          Delete
+                        </MenuItem>
+                      </Menu>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
             <TableFooter>
               <TableRow>
@@ -175,9 +252,28 @@ class RoomsTable extends React.Component<RoomsTableProps> {
             </TableFooter>
           </Table>
         </div>
+
+        <Dialog
+          open={this.isDeletePending()}
+          onClose={this.cancelDelete}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">Confirm</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure that you'd liked to delete the item?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.cancelDelete} color="primary">Cancel</Button>
+            <Button onClick={this.confirmDelete} color="primary" autoFocus>Ok</Button>
+          </DialogActions>
+        </Dialog>
+
       </Paper>
     );
   }
 }
 
-export default withStyles(styles)(RoomsTable);
+export default withStyles(styles)(withRouter(RoomsTable));
