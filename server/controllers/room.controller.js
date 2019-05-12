@@ -1,9 +1,5 @@
 const Room = require('../models/room.model');
 
-exports.health = function (req, res) {
-  res.json({ success: true });
-};
-
 exports.search = function (req, res, next) {
   const page = req.query.page && parseInt(req.query.page) || 1;
   const limit = req.query.limit && parseInt(req.query.limit) || 10;

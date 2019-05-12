@@ -29,6 +29,11 @@ export default class RoomApi {
     return await response.json();
   }
 
+  static async getLastNMessages(room: string, n: number) {
+    const response = await fetch(`/messages/get-last-n?room=${room}&n=${n}`);
+    return await response.json();
+  }
+
   static async add(room: RoomApiAddPayload) {
     const response = await fetch("/rooms/create", {
       method: "POST",

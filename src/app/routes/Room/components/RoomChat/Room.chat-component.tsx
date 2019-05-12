@@ -11,19 +11,23 @@ import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/st
 import {
   start,
 } from '../../actions/Room.get-single.actions';
+import {
+  getLastNMessages,
+} from '../../actions/Room.get-last-n-messages.action';
 import {REDUCER_NAME__ROOM} from "../../Room.reducer";
 import Centered from '../../../../../components/Centered';
 import { REDUCER_NAME__APP } from '../../../../App.reducer';
 import { Config } from '../../../../App.types';
+import RoomApi from "../../../../apis/Room.api";
 
 function mapStateToProps(state: any) {
   const { loading, item } = state[REDUCER_NAME__ROOM];
   const { config } = state[REDUCER_NAME__APP];
   return { loading, item, config };
 }
-const mapDispatchToProps = { start };
+const mapDispatchToProps = { start, getLastNMessages };
 
-interface RoomChatProps { start: Function, loading: boolean, item?: any, config: Config }
+interface RoomChatProps { start: Function, getLastNMessages: Function, loading: boolean, item?: any, config: Config }
 export interface RoomChatState {
   messages: Array<any>,
   message: string
@@ -55,10 +59,19 @@ class RoomChat extends Component<Props, RoomChatState> {
     }
   }
 
-  addMessage = (data: any) => this.setState({ messages: [...this.state.messages, data]});
-  load = async () => await this.props.start(this.props.match.params.id, (room: string) => {
-    this.socket.emit('ENTER_ROOM', { room });
-  });
+  addMessage = (data: any) => {
+    console.log('data', data);
+    this.setState({ messages: [...this.state.messages, data]});
+  };
+  load = async () => {
+    await this.props.start(this.props.match.params.id, (room: string) => {
+      this.socket.emit('ENTER_ROOM', { room });
+
+      // TODO: don't call api from here. Bring messages to the Redux state.
+      RoomApi.getLastNMessages(room, 5)
+        .then((messages: Array<any>) => this.setState({ messages: messages.reverse() }))
+    });
+  };
   sendMessage = (ev: any) => {
     ev.preventDefault();
     this.socket.emit('SEND_MESSAGE', {
