@@ -1,14 +1,11 @@
 import actionCreatorFactory from 'typescript-fsa';
 import { Dispatch } from 'redux';
 import { toastr } from 'react-redux-toastr';
-// import { initialize } from "redux-form";
 
 import { ErrorWrapper } from '../../../../viewModels/base';
 import CommonUtilities from "../../../../helpers/CommonUtilities";
 import RoomApi, {RoomApiUpdatePayload} from "../../../apis/Room.api";
-import {roomFormName, RoomUpdateState} from "../Room.edit-component";
-// import { RoomReduxState, REDUCER_NAME__ROOM } from "../Room.reducer";
-// import {RoomCreateState} from "../Room.create-component";
+import { FormValues as RoomEditFormValues } from '../components/RoomEdit/types';
 
 const actionCreator = actionCreatorFactory();
 
@@ -24,7 +21,7 @@ export const cancel = actionCreator<{}>('ROOM/EDIT/CANCEL');
 export const startActions = actionCreator.async<{}, {id: string, item: any}, ErrorWrapper>('ROOM/EDIT/START');
 
 export function start(id: string, onSuccess: Function) {
-  return async (dispatch: Dispatch<any>, getState: Function) => {
+  return async (dispatch: Dispatch<any>) => {
 
     // TODO: to functional programming
     async function mainAction() {
@@ -53,7 +50,7 @@ export function start(id: string, onSuccess: Function) {
  */
 export const submitActions = actionCreator.async<{}, {}, ErrorWrapper>('ROOM/EDIT/SUBMIT');
 
-export function submit(id: string, formValues: RoomUpdateState, onSuccess: Function) {
+export function submit(id: string, formValues: RoomEditFormValues, onSuccess: Function) {
   return async (dispatch: Dispatch<any>) => {
 
     async function mainAction() {

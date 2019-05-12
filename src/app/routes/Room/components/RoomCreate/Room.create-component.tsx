@@ -6,10 +6,9 @@ import withStyles, {StyleRules} from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
-import createSingle from './actions/Room.create-single.actions';
-import Centered from '../../../components/Centered';
+import createSingle from '../../actions/Room.create-single.actions';
+import Centered from '../../../../../components/Centered';
 
-export const roomFormName = "room-create-form";
 export interface RoomCreateState { name: string }
 
 const style = (theme: Theme): StyleRules => ({
@@ -20,12 +19,6 @@ const style = (theme: Theme): StyleRules => ({
     margin: theme.spacing.unit
   },
 });
-
-function mapStateToProps(state: any) {
-  return {};
-}
-// noinspection JSUnusedGlobalSymbols
-const mapDispatchToProps = { createSingle };
 
 interface RoomCreateProps { createSingle: Function }
 class RoomCreate extends Component<RoomCreateProps & StyledComponentProps & RouteComponentProps<any>, RoomCreateState> {
@@ -59,6 +52,6 @@ class RoomCreate extends Component<RoomCreateProps & StyledComponentProps & Rout
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  () => {},
+  { createSingle }
 )(withStyles(style)(withRouter(RoomCreate)));

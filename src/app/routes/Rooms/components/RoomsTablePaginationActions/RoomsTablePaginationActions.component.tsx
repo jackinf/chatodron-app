@@ -3,9 +3,9 @@ import { StyleRules } from '@material-ui/core/styles';
 import * as React from 'react';
 import { TablePaginationActionsProps } from '@material-ui/core/TablePagination/TablePaginationActions';
 import IconButton from '@material-ui/core/IconButton';
-import LastPageIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import {
   FirstPage as FirstPageIcon,
+  LastPage as LastPageIcon,
   KeyboardArrowLeft,
   KeyboardArrowRight,
 } from '@material-ui/icons';

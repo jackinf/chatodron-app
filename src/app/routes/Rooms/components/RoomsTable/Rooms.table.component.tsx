@@ -26,8 +26,10 @@ import Button from '@material-ui/core/Button';
 
 import { RoomType } from '../../../../types/Room.type';
 import { defaultMargin } from '../../../../../helpers/styles/layoutHelper';
-import { ITEM_HEIGHT, roomRoutes } from '../../constants';
+import { ITEM_HEIGHT } from '../../constants';
 import RoomsTablePaginationActions from '../RoomsTablePaginationActions';
+import { DEFAULT_LIMIT, DEFAULT_TOTAL } from './constants';
+import { roomRoutes } from '../../../constants';
 
 const styles = (theme: Theme): StyleRules => ({
   root: {
@@ -150,8 +152,8 @@ function RoomsTable(props: RoomsTableProps & RouteComponentProps<{}>) {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 colSpan={3}
-                count={total}
-                rowsPerPage={limit}
+                count={total || DEFAULT_TOTAL}
+                rowsPerPage={limit || DEFAULT_LIMIT}
                 page={page - 1}
                 SelectProps={{
                   native: true,

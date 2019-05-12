@@ -4,7 +4,7 @@ import { toastr } from 'react-redux-toastr';
 
 import { ErrorWrapper } from '../../../../viewModels/base';
 import CommonUtilities from "../../../../helpers/CommonUtilities";
-import {RoomCreateState, roomFormName} from "../Room.create-component";
+import {RoomCreateState} from "../components/RoomCreate/Room.create-component";
 import RoomsApi, {RoomApiAddPayload} from "../../../apis/Room.api";
 
 const actionCreator = actionCreatorFactory();
@@ -26,7 +26,7 @@ export const startActions = actionCreator.async<{}, {}, ErrorWrapper>('ROOM/CREA
 export const submitActions = actionCreator.async<{}, {}, ErrorWrapper>('ROOM/CREATE/SUBMIT');
 
 export default function submit(formValues: RoomCreateState, onSuccess: Function) {
-  return async (dispatch: Dispatch<any>, getState: Function) => {
+  return async (dispatch: Dispatch<any>) => {
 
     async function mainAction() {
       dispatch(submitActions.started({}));

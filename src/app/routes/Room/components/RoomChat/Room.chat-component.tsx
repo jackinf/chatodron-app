@@ -10,23 +10,27 @@ import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/st
 
 import {
   start,
-} from './actions/Room.get-single.actions';
-import {REDUCER_NAME__ROOM} from "./Room.reducer";
-import Centered from '../../../components/Centered';
+} from '../../actions/Room.get-single.actions';
+import {REDUCER_NAME__ROOM} from "../../Room.reducer";
+import Centered from '../../../../../components/Centered';
+import { REDUCER_NAME__APP } from '../../../../App.reducer';
+import { Config } from '../../../../App.types';
 
 function mapStateToProps(state: any) {
   const { loading, item } = state[REDUCER_NAME__ROOM];
-  return { loading, item };
+  const { config } = state[REDUCER_NAME__APP];
+  return { loading, item, config };
 }
 const mapDispatchToProps = { start };
 
-interface RoomChatProps { start: Function, loading: boolean, item?: any }
+interface RoomChatProps { start: Function, loading: boolean, item?: any, config: Config }
 export interface RoomChatState {
   messages: Array<any>,
   message: string
 }
 
-class RoomChat extends Component<RoomChatProps & RouteComponentProps<{ id: string }> & StyledComponentProps, RoomChatState> {
+type Props = RoomChatProps & RouteComponentProps<{ id: string }> & StyledComponentProps;
+class RoomChat extends Component<Props, RoomChatState> {
   state = {
     message: '',
     room: '',
@@ -34,10 +38,10 @@ class RoomChat extends Component<RoomChatProps & RouteComponentProps<{ id: strin
   };
 
   socket: SocketIOClient.Socket;
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
 
-    this.socket = io('localhost:4000'); // TODO: replace localhost
+    this.socket = io(props.config.backendHost);
     this.socket.on('RECEIVE_MESSAGE', (data: any) => this.addMessage(data));
   }
 

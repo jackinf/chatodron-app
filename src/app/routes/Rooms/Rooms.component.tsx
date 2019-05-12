@@ -12,7 +12,7 @@ import { REDUCER_NAME__ROOMS } from "./Rooms.reducer";
 import RoomsTable from "./components/RoomsTable";
 import {RoomsTableData} from "./actions/Rooms.types";
 import Centered from '../../../components/Centered';
-import { roomRoutes } from './constants';
+import { roomRoutes } from '../constants';
 
 function mapStateToProps(state: any) {
   const { tableData, loading } = state[REDUCER_NAME__ROOMS];
