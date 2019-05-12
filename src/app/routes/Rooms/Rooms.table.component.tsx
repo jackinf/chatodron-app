@@ -29,6 +29,7 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import Button from '@material-ui/core/Button';
 
 import {RoomType} from "../../types/Room.type";
+import { defaultMargin } from '../../../helpers/styles/layoutHelper';
 const ITEM_HEIGHT = 48; // todo: to constants
 
 const actionsStyles = (theme: Theme): StyleRules => ({
@@ -105,7 +106,7 @@ const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: tru
 
 const styles = (theme: Theme): StyleRules => ({
   root: {
-    width: '100%',
+    ...defaultMargin(theme),
     marginTop: theme.spacing.unit * 3,
   },
   table: {

@@ -2,15 +2,16 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import Fab from '@material-ui/core/Fab';
+import withStyles, { StyleRules, WithStyles } from '@material-ui/core/styles/withStyles';
+import {Theme} from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
 
 import getList from "./actions/Rooms.get-list.actions";
 import { submit as remove } from "./actions/Rooms.delete-single.actions";
 import { REDUCER_NAME__ROOMS } from "./Rooms.reducer";
 import RoomsTable from "./Rooms.table.component";
 import {RoomsTableData} from "./actions/Rooms.types";
-import withStyles, {StyleRules} from "@material-ui/core/styles/withStyles";
-import {Theme} from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
+import Centered from '../../../components/Centered';
 
 function mapStateToProps(state: any) {
   const { tableData, loading } = state[REDUCER_NAME__ROOMS];
@@ -27,6 +28,7 @@ const styles = (theme: Theme): StyleRules => ({
   },
 
   main: {
+    flexGrow: 1,
   },
 
   addButton: {
@@ -36,29 +38,27 @@ const styles = (theme: Theme): StyleRules => ({
   },
 });
 
-interface RoomsProps {
+interface RoomsProps extends WithStyles<typeof styles> {
   tableData: RoomsTableData,
   loading: boolean,
-  classes: any,
 
   getList: Function,
   remove: Function
 }
-class Rooms extends Component<RoomsProps & RouteComponentProps<any>> {
+class Rooms extends Component<RoomsProps & RouteComponentProps<{}>> {
   async componentDidMount() {
-    await this.getList();
+    await this.props.getList();
   }
 
-  getList = async () => await this.props.getList();
   goToAddItemPage = () => this.props.history.push("/rooms/new"); // todo: to constants; todo; dispatch action
   remove = () => this.props.remove();
 
   render() {
-    const { tableData, getList, loading, classes } = this.props;
+    const { tableData, getList, classes } = this.props;
 
     return (
-      <div className={classes && classes.wrapper}>
-        <span className={classes && classes.main}>
+      <>
+        <Centered>
           <RoomsTable
             getList={getList}
             confirmDelete={this.props.remove}
@@ -67,12 +67,11 @@ class Rooms extends Component<RoomsProps & RouteComponentProps<any>> {
             docs={tableData.docs}
             total={tableData.total}
           />
-        </span>
-
+        </Centered>
         <Fab className={classes.addButton} color="secondary">
           <AddIcon onClick={this.goToAddItemPage} />
         </Fab>
-      </div>
+      </>
     );
   }
 }

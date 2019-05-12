@@ -2,16 +2,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {RouteComponentProps} from "react-router";
 import FormGroup from '@material-ui/core/FormGroup';
+import io from "socket.io-client";
+import Button from "@material-ui/core/Button";
+import {TextField, Theme} from "@material-ui/core";
+import {withRouter} from "react-router";
+import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/styles/withStyles";
 
 import {
   start,
 } from './actions/Room.get-single.actions';
 import {REDUCER_NAME__ROOM} from "./Room.reducer";
-import {withRouter} from "react-router";
-import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/styles/withStyles";
-import {TextField, Theme} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import io from "socket.io-client";
+import Centered from '../../../components/Centered';
 
 function mapStateToProps(state: any) {
   const { loading, item } = state[REDUCER_NAME__ROOM];
@@ -32,7 +33,7 @@ class RoomChat extends Component<RoomChatProps & RouteComponentProps<{ id: strin
     messages: []
   };
 
-  private socket: SocketIOClient.Socket;
+  socket: SocketIOClient.Socket;
   constructor(props: any) {
     super(props);
 
@@ -71,7 +72,7 @@ class RoomChat extends Component<RoomChatProps & RouteComponentProps<{ id: strin
     }
 
     return (
-      <span>
+      <Centered>
         <div>
           {this.state.messages.map((message: any, k: number) => {
             return (
@@ -81,24 +82,24 @@ class RoomChat extends Component<RoomChatProps & RouteComponentProps<{ id: strin
         </div>
 
         <form className={classes && classes.container} noValidate autoComplete="off">
-        <FormGroup row={false}>
-          <TextField
-            required
-            id="outlined-required"
-            label="Name"
-            className={classes && classes.textField}
-            margin="normal"
-            onChange={e => this.setState({ message: e.target.value })}
-            variant="outlined"
-            value={this.state.message}
-          />
-        </FormGroup>
+          <FormGroup row={false}>
+            <TextField
+              required
+              id="outlined-required"
+              label="Message"
+              className={classes && classes.textField}
+              margin="normal"
+              onChange={e => this.setState({ message: e.target.value })}
+              variant="outlined"
+              value={this.state.message}
+            />
+          </FormGroup>
 
-        <Button variant="outlined" color="primary" className={classes && classes.button} onClick={this.sendMessage}>
-          Send
-        </Button>
-      </form>
-      </span>
+          <Button variant="outlined" color="primary" className={classes && classes.button} onClick={this.sendMessage}>
+            Send
+          </Button>
+        </form>
+      </Centered>
     );
   }
 }

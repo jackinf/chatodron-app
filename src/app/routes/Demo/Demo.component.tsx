@@ -1,6 +1,10 @@
 import * as React from 'react';
 import io from "socket.io-client";
 
+import Centered from '../../../components/Centered';
+import { Button } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+
 const id = Math.random();
 
 class Demo extends React.Component {
@@ -28,7 +32,7 @@ class Demo extends React.Component {
     });
     this.setState({message: ''});
   };
-  private socket: SocketIOClient.Socket;
+  socket: SocketIOClient.Socket;
 
   constructor(props: any) {
     super(props);
@@ -56,18 +60,18 @@ class Demo extends React.Component {
   render() {
     if (!this.state.room) {
       return (
-        <div>
-          Set room name:
-          <input type="text" placeholder="Room" className="form-control"
+        <Centered>
+          <h2>Set room name:</h2>
+          <TextField type="text" placeholder="Room" className="form-control"
                  value={this.state.tempRoom} onChange={ev => this.setState({tempRoom: ev.target.value})}/>
-          <button onClick={this.setRoom} className="btn btn-primary form-control">Send</button>
-        </div>
+          <Button onClick={this.setRoom} className="btn btn-primary form-control">Send</Button>
+        </Centered>
       )
     }
 
     return (
-      <div>
-        Chat room
+      <Centered>
+        <h2>Chat room</h2>
 
         <div className="messages">
           {this.state.messages.map((message: any, k: number) => {
@@ -77,12 +81,10 @@ class Demo extends React.Component {
           })}
         </div>
 
-
         <input type="text" placeholder="Message" className="form-control"
                value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/>
-        <button onClick={this.sendMessage} className="btn btn-primary form-control">Send</button>
-
-      </div>
+        <Button onClick={this.sendMessage} className="btn btn-primary form-control">Send</Button>
+      </Centered>
     );
   }
 }

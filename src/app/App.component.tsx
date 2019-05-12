@@ -1,9 +1,10 @@
 import * as React from 'react';
-// import {MuiThemeProvider} from '@material-ui/core/styles';
 import {Redirect, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ReduxToastr from "react-redux-toastr";
 import {Switch} from "react-router";
+import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/styles/withStyles";
+import {Theme} from "@material-ui/core";
 
 import TemtHeader from '../components/Header';
 import Footer from '../components/Footer';
@@ -15,8 +16,7 @@ import {ErrorWrapper} from "../viewModels/base";
 import RoomsRoutes from "./routes/Rooms";
 import RoomRoutes from "./routes/Room";
 import DemoRoutes from "./routes/Demo";
-import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/styles/withStyles";
-import {Theme} from "@material-ui/core";
+import Centered from '../components/Centered';
 
 const RestrictedRoute = ({component: Component, ...rest}: any) =>
   (
@@ -48,7 +48,9 @@ const Main = withStyles((theme: Theme): StyleRules => ({
   }
 }))(({ classes }: StyledComponentProps) => (
   <div className={classes && classes.wrapper}>
-    <TemtHeader />
+    <Centered>
+      <TemtHeader />
+    </Centered>
     <span className={classes && classes.mainWrapper}>
       <RoomsRoutes />
       <RoomRoutes />
