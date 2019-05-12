@@ -7,8 +7,7 @@ import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/st
 import {Theme} from "@material-ui/core";
 
 import TemtHeader from '../components/Header';
-import Footer from '../components/Footer';
-import {AppComponentDispatchProps, AppComponentStateProps} from './App.component';
+import Footer from '../components/Footer/Footer.component';
 import {AppReduxState, REDUCER_NAME__APP} from "./App.reducer";
 import {routePaths} from "../constants/api.constants";
 import asyncComponent from "../helpers/AsyncComponent";
@@ -35,7 +34,7 @@ const RestrictedRoute = ({component: Component, ...rest}: any) =>
 const Main = withStyles((theme: Theme): StyleRules => ({
   wrapper: {
     display: "flex",
-    minHeight: "100vh",
+    minHeight: "95vh",
     flexDirection: "column"
   },
 
@@ -62,12 +61,12 @@ const Main = withStyles((theme: Theme): StyleRules => ({
   </div>
 ));
 
+export interface AppComponentDispatchProps {}
 export interface AppComponentStateProps {
   loading: boolean;
   error?: ErrorWrapper;
   isLoggedIn: boolean;
 }
-export interface AppComponentDispatchProps {}
 class AppComponent extends React.Component<AppComponentStateProps & AppComponentDispatchProps> {
 
   render() {

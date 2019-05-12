@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleRules, Theme, withStyles} from '@material-ui/core/styles';
+import { StyleRules, Theme, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,25 +12,26 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-import {TablePaginationActionsProps} from "@material-ui/core/TablePagination/TablePaginationActions";
+import { TablePaginationActionsProps } from '@material-ui/core/TablePagination/TablePaginationActions';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import InputIcon from '@material-ui/icons/Input';
 import ViewIcon from '@material-ui/icons/Visibility';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import TableHead from "@material-ui/core/TableHead";
+import TableHead from '@material-ui/core/TableHead';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-import {RoomType} from "../../types/Room.type";
+import { RoomType } from '../../types/Room.type';
 import { defaultMargin } from '../../../helpers/styles/layoutHelper';
-const ITEM_HEIGHT = 48; // todo: to constants
+import { DEFAULT_LIMIT, DEFAULT_PAGE, DEFAULT_TOTAL, ITEM_HEIGHT, roomRoutes } from './constants';
 
 const actionsStyles = (theme: Theme): StyleRules => ({
   root: {
@@ -40,9 +41,12 @@ const actionsStyles = (theme: Theme): StyleRules => ({
   },
 });
 
-interface TablePaginationActionsAdditionalProps { classes: any; theme: any; }
-class TablePaginationActions extends React.Component<
-  TablePaginationActionsProps & TablePaginationActionsAdditionalProps> {
+interface TablePaginationActionsAdditionalProps {
+  classes: any;
+  theme: any;
+}
+
+class TablePaginationActions extends React.Component<TablePaginationActionsProps & TablePaginationActionsAdditionalProps> {
   handleFirstPageButtonClick = (event: any) => {
     this.props.onChangePage(event, 0);
   };
@@ -63,7 +67,7 @@ class TablePaginationActions extends React.Component<
   };
 
   render() {
-    const { classes, count, page, rowsPerPage, theme } = this.props;
+    const {classes, count, page, rowsPerPage, theme} = this.props;
 
     return (
       <div className={classes.root}>
@@ -72,35 +76,35 @@ class TablePaginationActions extends React.Component<
           disabled={page === 0}
           aria-label="First Page"
         >
-          {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+          {theme.direction === 'rtl' ? <LastPageIcon/> : <FirstPageIcon/>}
         </IconButton>
         <IconButton
           onClick={this.handleBackButtonClick}
           disabled={page === 0}
           aria-label="Previous Page"
         >
-          {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+          {theme.direction === 'rtl' ? <KeyboardArrowRight/> : <KeyboardArrowLeft/>}
         </IconButton>
         <IconButton
           onClick={this.handleNextButtonClick}
           disabled={page >= Math.ceil(count / rowsPerPage) - 1}
           aria-label="Next Page"
         >
-          {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+          {theme.direction === 'rtl' ? <KeyboardArrowLeft/> : <KeyboardArrowRight/>}
         </IconButton>
         <IconButton
           onClick={this.handleLastPageButtonClick}
           disabled={page >= Math.ceil(count / rowsPerPage) - 1}
           aria-label="Last Page"
         >
-          {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+          {theme.direction === 'rtl' ? <FirstPageIcon/> : <LastPageIcon/>}
         </IconButton>
       </div>
     );
   }
 }
 
-const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: true })(
+const TablePaginationActionsWrapped = withStyles(actionsStyles, {withTheme: true})(
   TablePaginationActions,
 );
 
@@ -127,39 +131,42 @@ interface RoomsTableProps {
   getList: Function;
   confirmDelete: Function;
 }
+
 interface RoomsTableState {
   actionMenuEl?: HTMLElement;
   deletePendingItemId?: string;
 }
+
 class RoomsTable extends React.Component<RoomsTableProps & RouteComponentProps<any>, RoomsTableState> {
   static defaultProps = {
     docs: [],
-    limit: 10, // todo: extract from here
-    page: 0, // todo: extract from here
-    total: 0 // todo: extract from here
+    limit: DEFAULT_LIMIT,
+    page: DEFAULT_PAGE,
+    total: DEFAULT_TOTAL,
   };
 
   handleChangePage = async (event: any, page: number) => {
-    await this.props.getList({ page: page+1, limit: this.props.limit });
+    await this.props.getList({page: page + 1, limit: this.props.limit});
   };
 
   handleChangeRowsPerPage = async (event: any) => {
-    await this.props.getList({ page: this.props.page, limit: event.target.value });
+    await this.props.getList({page: this.props.page, limit: event.target.value});
   };
 
   refreshTable = async () => {
-    await this.props.getList({ page: this.props.page, limit: this.props.limit });
+    await this.props.getList({page: this.props.page, limit: this.props.limit});
   };
 
-  handleOpenMenu = (event: any) => this.setState({ actionMenuEl: event.currentTarget });
-  handleCloseMenu = () => this.setState({ actionMenuEl: undefined });
-  viewItem = (id: string) => this.props.history.push(`/rooms/${id}`); // todo: to constants; todo: dispatch route change
-  editItem = (id: string) => this.props.history.push(`/rooms/${id}/edit`); // todo: to constants; todo: dispatch route change
+  handleOpenMenu = (event: any) => this.setState({actionMenuEl: event.currentTarget});
+  handleCloseMenu = () => this.setState({actionMenuEl: undefined});
+  enterChat = (id: string) => this.props.history.push(roomRoutes.chat(id));
+  viewItem = (id: string) => this.props.history.push((roomRoutes.view(id)));
+  editItem = (id: string) => this.props.history.push(roomRoutes.edit(id));
   startDelete = (deletePendingItemId: string) => {
     this.handleCloseMenu();
-    this.setState({ deletePendingItemId })
+    this.setState({deletePendingItemId});
   };
-  cancelDelete = () => this.setState({ deletePendingItemId: undefined });
+  cancelDelete = () => this.setState({deletePendingItemId: undefined});
   confirmDelete = () => this.props.confirmDelete(this.state.deletePendingItemId, async () => {
     this.cancelDelete();
     await this.refreshTable();
@@ -167,7 +174,7 @@ class RoomsTable extends React.Component<RoomsTableProps & RouteComponentProps<a
   isDeletePending = () => !!this.state && !!this.state.deletePendingItemId;
 
   render() {
-    const { classes, docs, limit, page, total } = this.props;
+    const {classes, docs, limit, page, total} = this.props;
 
     return (
       <Paper className={classes.root}>
@@ -216,9 +223,13 @@ class RoomsTable extends React.Component<RoomsTableProps & RouteComponentProps<a
                           },
                         }}
                       >
+                        <MenuItem onClick={() => this.enterChat(row._id)}>
+                          <InputIcon className={classes.icon}/> &nbsp;
+                          Enter
+                        </MenuItem>
                         <MenuItem onClick={() => this.viewItem(row._id)}>
                           <ViewIcon className={classes.icon}/> &nbsp;
-                          View
+                          View Details
                         </MenuItem>
                         <MenuItem onClick={() => this.editItem(row._id)}>
                           <EditIcon className={classes.icon}/> &nbsp;
@@ -241,7 +252,7 @@ class RoomsTable extends React.Component<RoomsTableProps & RouteComponentProps<a
                   colSpan={3}
                   count={total}
                   rowsPerPage={limit}
-                  page={page-1}
+                  page={page - 1}
                   SelectProps={{
                     native: true,
                   }}
