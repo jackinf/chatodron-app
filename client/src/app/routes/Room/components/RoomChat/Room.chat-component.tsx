@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import {TextField, Theme} from "@material-ui/core";
 import {withRouter} from "react-router";
 import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/styles/withStyles";
+import AlignListItems from './components/AlignListItems';
+import MessagesBox from './components/MessagesBox';
 
 import {
   start,
@@ -30,7 +32,7 @@ const mapDispatchToProps = { start, getLastNMessages };
 interface RoomChatProps { start: Function, getLastNMessages: Function, loading: boolean, item?: any, config: Config }
 export interface RoomChatState {
   messages: Array<any>,
-  message: string
+  message: string,
   users: Array<string>,
 }
 
@@ -74,7 +76,7 @@ class RoomChat extends Component<Props, RoomChatState> {
 
       // TODO: don't call api from here. Bring messages to the Redux state.
       RoomApi.getLastNMessages(room, 5)
-        .then((messages: Array<any>) => this.setState({ messages: messages.reverse() }))
+        .then((messages: any[]) => this.setState({ messages: messages.reverse() }))
     });
   };
   sendMessage = (ev: any) => {    ev.preventDefault();
@@ -94,6 +96,9 @@ class RoomChat extends Component<Props, RoomChatState> {
 
     return (
       <Centered>
+        {/*<AlignListItems />*/}
+        <MessagesBox />
+
         <h3>Active users: </h3>
         <div>
           {this.state.users && this.state.users.map((user: any, k: number) => <div key={k}>User {user}</div>)}

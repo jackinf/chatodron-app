@@ -20,7 +20,7 @@ const style = (theme: Theme): StyleRules => ({
   },
 });
 
-interface RoomCreateProps { createSingle: Function }
+interface RoomCreateProps { createSingle: (formValues: RoomCreateState, onSuccess: () => void) => void }
 class RoomCreate extends Component<RoomCreateProps & StyledComponentProps & RouteComponentProps<any>, RoomCreateState> {
   handleAdd = () => this.props.createSingle({ ...this.state }, () => this.props.history.push("/rooms"));
 
@@ -37,7 +37,7 @@ class RoomCreate extends Component<RoomCreateProps & StyledComponentProps & Rout
               label="Name"
               className={classes && classes.textField}
               margin="normal"
-              onChange={e => this.setState({ name: e.target.value })}
+              onChange={(e: any) => this.setState({ name: e.target.value })}
               variant="outlined"
             />
           </FormGroup>

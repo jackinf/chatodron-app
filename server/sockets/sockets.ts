@@ -34,8 +34,11 @@ const start = (server: any) => {
 };
 
 function emitRoomParticipants(io: any, room: any) {
-  const { sockets } = io.sockets.adapter.rooms[room];
-  io.to(room).emit(socketEvents.ROOM_PARTICIPANTS, { activeUsers: sockets });
+  const roomSockets = io.sockets.adapter.rooms[room];
+  if (roomSockets) {
+    const { sockets } = roomSockets;
+    io.to(room).emit(socketEvents.ROOM_PARTICIPANTS, { activeUsers: sockets });
+  }
 }
 
 export default {

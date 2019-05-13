@@ -31,7 +31,7 @@ const styles = (theme: Theme): StyleRules => ({
 });
 
 interface RoomUpdateProps {
-  start: Function,
+  start: (id: string, onSuccess: () => void) => void,
   loading: boolean,
   item?: any,
 }
@@ -40,7 +40,7 @@ function Room(props: Props) {
   const { start, match, history, loading, item, classes } = props;
 
   useEffect(() => {
-    start(match.params.id);
+    start(match.params.id, () => {});
   }, []);
 
   const handleGoToChatPage = () => history.push(roomRoutes.chat(match.params.id));

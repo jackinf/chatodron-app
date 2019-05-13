@@ -33,7 +33,8 @@
     "typescript-fsa": "^3.0.0-beta-2"
   },
   "scripts": {
-    "start": "PORT=9000 react-scripts start",
+    "start-9000": "PORT=9000 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

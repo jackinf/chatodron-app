@@ -48,7 +48,7 @@ function RoomEdit(props: Props) {
             defaultValue={item.name}
             className={classes && classes.textField}
             margin="normal"
-            onChange={e => setFormValues({ name: e.target.value })}
+            onChange={(e: any) => setFormValues({ name: e.target.value })}
             variant="outlined"
           />
         </FormGroup>
