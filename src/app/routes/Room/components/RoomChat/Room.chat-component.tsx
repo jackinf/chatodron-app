@@ -31,6 +31,7 @@ interface RoomChatProps { start: Function, getLastNMessages: Function, loading: 
 export interface RoomChatState {
   messages: Array<any>,
   message: string
+  users: Array<string>,
 }
 
 type Props = RoomChatProps & RouteComponentProps<{ id: string }> & StyledComponentProps;
@@ -38,7 +39,8 @@ class RoomChat extends Component<Props, RoomChatState> {
   state = {
     message: '',
     room: '',
-    messages: []
+    messages: [],
+    users: [],
   };
 
   socket: SocketIOClient.Socket;
@@ -47,6 +49,10 @@ class RoomChat extends Component<Props, RoomChatState> {
 
     this.socket = io(props.config.backendHost);
     this.socket.on('RECEIVE_MESSAGE', (data: any) => this.addMessage(data));
+    this.socket.on('ROOM_PARTICIPANTS', ({ activeUsers }: { activeUsers: Array<string> }) => {
+      console.log('activeSockets', activeUsers);
+      this.setState({ users: Object.keys(activeUsers) });
+    });
   }
 
   async componentDidMount() {
@@ -60,7 +66,6 @@ class RoomChat extends Component<Props, RoomChatState> {
   }
 
   addMessage = (data: any) => {
-    console.log('data', data);
     this.setState({ messages: [...this.state.messages, data]});
   };
   load = async () => {
@@ -72,8 +77,7 @@ class RoomChat extends Component<Props, RoomChatState> {
         .then((messages: Array<any>) => this.setState({ messages: messages.reverse() }))
     });
   };
-  sendMessage = (ev: any) => {
-    ev.preventDefault();
+  sendMessage = (ev: any) => {    ev.preventDefault();
     this.socket.emit('SEND_MESSAGE', {
       room: this.props.item.name,
       message: this.state.message
@@ -90,8 +94,14 @@ class RoomChat extends Component<Props, RoomChatState> {
 
     return (
       <Centered>
+        <h3>Active users: </h3>
         <div>
-          {this.state.messages.map((message: any, k: number) => {
+          {this.state.users && this.state.users.map((user: any, k: number) => <div key={k}>User {user}</div>)}
+        </div>
+        <hr/>
+        <div>
+          <h3>Messages: </h3>
+          {this.state.messages && this.state.messages.map((message: any, k: number) => {
             return (
               <div key={k}>{message.author}: {message.message}</div>
             )
