@@ -1,21 +1,21 @@
-const {socketEvents} = require('./constants');
+import socket from 'socket.io';
 
-const socket = require('socket.io');
-const messageService = require('../services/message.service');
+import {socketEvents} from './constants';
+import messageService from '../services/message.service';
 
-exports.start = (server) => {
+const start = (server: any) => {
   const io = socket(server);
-  io.on('connection', (socket) => {
-    socket.on(socketEvents.ENTER_ROOM, data => {
+  io.on('connection', (socket: any) => {
+    socket.on(socketEvents.ENTER_ROOM, (data: any) => {
       socket.join(data.room);
       emitRoomParticipants(io, data.room);
     });
 
-    socket.on(socketEvents.LEAVE_ROOM, data => {
+    socket.on(socketEvents.LEAVE_ROOM, (data: any) => {
       socket.leave(data.room, () => emitRoomParticipants(io, data.room));
     });
 
-    socket.on(socketEvents.SEND_MESSAGE, function(data) {
+    socket.on(socketEvents.SEND_MESSAGE, function(data: any) {
       if (data.room) {
         const payload = { ...data, author: socket.id };
         messageService.add(payload);
@@ -23,7 +23,7 @@ exports.start = (server) => {
       }
     });
 
-    socket.on(socketEvents.CHECK_ROOM_PARTICIPANTS, function(data) {
+    socket.on(socketEvents.CHECK_ROOM_PARTICIPANTS, function(data: any) {
       if (data.room) {
         emitRoomParticipants(io, data.room);
       }
@@ -33,7 +33,11 @@ exports.start = (server) => {
   });
 };
 
-function emitRoomParticipants(io, room) {
+function emitRoomParticipants(io: any, room: any) {
   const { sockets } = io.sockets.adapter.rooms[room];
   io.to(room).emit(socketEvents.ROOM_PARTICIPANTS, { activeUsers: sockets });
+}
+
+export default {
+  start,
 }

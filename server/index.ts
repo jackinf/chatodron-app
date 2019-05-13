@@ -1,12 +1,14 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+import express from 'express';
+import bodyParser from 'body-parser';
 
-const status = require('./routes/status.route');
-const rooms = require('./routes/room.route');
-const messages = require('./routes/message.route');
+import status from './routes/status.route';
+import rooms from './routes/room.route';
+import messages from './routes/message.route';
+import database from './database';
+import sockets from './sockets';
+
 const app = express();
 
-const database = require('./database');
 database.start();
 
 app.use(bodyParser.json());
@@ -21,5 +23,4 @@ const server = app.listen(port, () => console.log(`Server is up and running on p
 /*
   Sockets need to be initialized as a last step when database and server are up.
  */
-const sockets = require('./sockets');
 sockets.start(server);

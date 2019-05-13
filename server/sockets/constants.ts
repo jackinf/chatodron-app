@@ -1,4 +1,4 @@
-exports.socketEvents = {
+export const socketEvents = {
   ENTER_ROOM: 'ENTER_ROOM',
   LEAVE_ROOM: 'LEAVE_ROOM',
   SEND_MESSAGE: 'SEND_MESSAGE',

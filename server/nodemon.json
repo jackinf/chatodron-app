@@ -2,13 +2,13 @@
   "restartable": "rs",
   "ignore": [
     ".git",
-    "src/**/*.spec.ts",
+    "./**/*.spec.ts",
     "node_modules"
   ],
   "verbose": true,
-  "exec": "ts-node src/server.ts",
+  "exec": "ts-node ./index.ts",
   "watch": [
-    "src"
+    "."
   ],
   "env": {
     "NODE_ENV": "development"
