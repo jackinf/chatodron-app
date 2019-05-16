@@ -38,7 +38,7 @@ function MessagesBox({
           {messages && messages.map((messageItem: MessageItem, index: number) => (
             <SingleMessage
               key={index}
-              message={`${messageItem.author}: ${messageItem.message}`}
+              message={messageItem.message}
               mineMessage={messageItem.author === socketId}
               author={messageItem.author}
             />

@@ -9,10 +9,10 @@ import Button from "@material-ui/core/Button";
 import {
   start,
   submit
-} from '../../actions/Room.udpate-single.actions';
-import {REDUCER_NAME__ROOM} from "../../Room.reducer";
-import Centered from '../../../../../components/Centered';
-import { roomRoutes } from '../../../constants';
+} from '../Room/actions/Room.udpate-single.actions';
+import {REDUCER_NAME__ROOM} from "../Room/Room.reducer";
+import Centered from '../../../components/Centered';
+import { roomRoutes } from '../constants';
 import { FormValues, Props } from './types';
 import styles from './styles';
 
@@ -22,7 +22,7 @@ function mapStateToProps(state: any) {
 }
 const mapDispatchToProps = { start, submit };
 
-function RoomEdit(props: Props) {
+function EditRoom(props: Props) {
   const { start, loading, item, classes, history, match, submit } = props;
 
   const [formValues, setFormValues] = useState<FormValues>({ name: '' });
@@ -31,7 +31,7 @@ function RoomEdit(props: Props) {
   }, []);
 
   const handleGoToViewPage = () => history.push(roomRoutes.view(match.params.id));
-  const handleUpdate = () => submit(match.params.id, {...formValues}, async () => await handleGoToViewPage());
+  const handleUpdate = () => formValues.name && submit(match.params.id, {...formValues}, async () => await handleGoToViewPage());
 
   if (loading || !item) {
     return <div>Loading</div>
@@ -67,4 +67,4 @@ function RoomEdit(props: Props) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(withRouter(RoomEdit)));
+)(withStyles(styles)(withRouter(EditRoom)));

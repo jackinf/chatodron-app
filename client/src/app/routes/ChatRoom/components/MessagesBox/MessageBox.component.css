@@ -245,7 +245,6 @@ body {
         transform: translateX(0);
     }
     .wrapper .inner {
-        height: 80%;
         height: 80vh;
     }
 }
@@ -257,10 +256,6 @@ body {
         right: 25%;
         -webkit-transform: translateX(0);
         transform: translateX(0);
-    }
-    .wrapper .inner {
-        height: 80%;
-        height: 80vh;
     }
 }
 

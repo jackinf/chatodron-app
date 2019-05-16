@@ -7,13 +7,13 @@ import { withRouter } from "react-router";
 import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/styles/withStyles";
 
 import MessagesBox from './components/MessagesBox';
-import { start } from '../../actions/Room.get-single.actions';
-import { getLastNMessages } from '../../actions/Room.get-last-n-messages.action';
-import {REDUCER_NAME__ROOM} from "../../Room.reducer";
-import Centered from '../../../../../components/Centered';
-import { REDUCER_NAME__APP } from '../../../../App.reducer';
-import { Config } from '../../../../App.types';
-import RoomApi from "../../../../apis/Room.api";
+import { start } from '../Room/actions/Room.get-single.actions';
+import { getLastNMessages } from '../Room/actions/Room.get-last-n-messages.action';
+import {REDUCER_NAME__ROOM} from "../Room/Room.reducer";
+import Centered from '../../../components/Centered';
+import { REDUCER_NAME__APP } from '../../App.reducer';
+import { Config } from '../../App.types';
+import RoomApi from "../../apis/Room.api";
 import scrollToBottomOfDiv from './helpers/scrollToBottomOfDiv';
 import { messageContainerDiv } from './constants';
 
@@ -25,7 +25,7 @@ export interface RoomChatState {
 }
 
 type Props = RoomChatProps & RouteComponentProps<{ id: string }> & StyledComponentProps;
-class RoomChat extends Component<Props, RoomChatState> {
+class ChatRoom extends Component<Props, RoomChatState> {
   state = {
     message: '',
     room: '',
@@ -124,4 +124,4 @@ export default connect(
   button: {
     margin: theme.spacing.unit
   },
-}))(withRouter(RoomChat)));
+}))(withRouter(ChatRoom)));

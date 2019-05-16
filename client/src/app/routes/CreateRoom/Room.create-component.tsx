@@ -6,8 +6,8 @@ import withStyles, {StyleRules} from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
-import createSingle from '../../actions/Room.create-single.actions';
-import Centered from '../../../../../components/Centered';
+import createSingle from '../Room/actions/Room.create-single.actions';
+import Centered from '../../../components/Centered';
 
 export interface RoomCreateState { name: string }
 
@@ -20,8 +20,8 @@ const style = (theme: Theme): StyleRules => ({
   },
 });
 
-interface RoomCreateProps { createSingle: (formValues: RoomCreateState, onSuccess: () => void) => void }
-class RoomCreate extends Component<RoomCreateProps & StyledComponentProps & RouteComponentProps<any>, RoomCreateState> {
+interface CreateRoomProps { createSingle: (formValues: RoomCreateState, onSuccess: () => void) => void }
+class CreateRoom extends Component<CreateRoomProps & StyledComponentProps & RouteComponentProps<any>, RoomCreateState> {
   handleAdd = () => this.props.createSingle({ ...this.state }, () => this.props.history.push("/rooms"));
 
   render() {
@@ -54,4 +54,4 @@ class RoomCreate extends Component<RoomCreateProps & StyledComponentProps & Rout
 export default connect(
   () => {},
   { createSingle }
-)(withStyles(style)(withRouter(RoomCreate)));
+)(withStyles(style)(withRouter(CreateRoom)));
