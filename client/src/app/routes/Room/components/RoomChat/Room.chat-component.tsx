@@ -1,21 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {RouteComponentProps} from "react-router";
-import FormGroup from '@material-ui/core/FormGroup';
 import io from "socket.io-client";
-import Button from "@material-ui/core/Button";
-import {TextField, Theme} from "@material-ui/core";
-import {withRouter} from "react-router";
+import { Theme } from "@material-ui/core";
+import { withRouter } from "react-router";
 import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/styles/withStyles";
-import AlignListItems from './components/AlignListItems';
-import MessagesBox from './components/MessagesBox';
 
-import {
-  start,
-} from '../../actions/Room.get-single.actions';
-import {
-  getLastNMessages,
-} from '../../actions/Room.get-last-n-messages.action';
+import MessagesBox from './components/MessagesBox';
+import { start } from '../../actions/Room.get-single.actions';
+import { getLastNMessages } from '../../actions/Room.get-last-n-messages.action';
 import {REDUCER_NAME__ROOM} from "../../Room.reducer";
 import Centered from '../../../../../components/Centered';
 import { REDUCER_NAME__APP } from '../../../../App.reducer';
@@ -79,7 +72,8 @@ class RoomChat extends Component<Props, RoomChatState> {
         .then((messages: any[]) => this.setState({ messages: messages.reverse() }))
     });
   };
-  sendMessage = (ev: any) => {    ev.preventDefault();
+  sendMessage = (ev?: any) => {
+    ev && ev.preventDefault();
     this.socket.emit('SEND_MESSAGE', {
       room: this.props.item.name,
       message: this.state.message
@@ -88,7 +82,7 @@ class RoomChat extends Component<Props, RoomChatState> {
   };
 
   render() {
-    const { loading, item, classes } = this.props;
+    const { loading, item } = this.props;
 
     if (loading || !item) {
       return <div>Loading</div>
@@ -96,41 +90,18 @@ class RoomChat extends Component<Props, RoomChatState> {
 
     return (
       <Centered>
-        {/*<AlignListItems />*/}
-        <MessagesBox />
 
         <h3>Active users: </h3>
         <div>
           {this.state.users && this.state.users.map((user: any, k: number) => <div key={k}>User {user}</div>)}
         </div>
-        <hr/>
-        <div>
-          <h3>Messages: </h3>
-          {this.state.messages && this.state.messages.map((message: any, k: number) => {
-            return (
-              <div key={k}>{message.author}: {message.message}</div>
-            )
-          })}
-        </div>
 
-        <form className={classes && classes.container} noValidate autoComplete="off">
-          <FormGroup row={false}>
-            <TextField
-              required
-              id="outlined-required"
-              label="Message"
-              className={classes && classes.textField}
-              margin="normal"
-              onChange={e => this.setState({ message: e.target.value })}
-              variant="outlined"
-              value={this.state.message}
-            />
-          </FormGroup>
-
-          <Button variant="outlined" color="primary" className={classes && classes.button} onClick={this.sendMessage}>
-            Send
-          </Button>
-        </form>
+        <MessagesBox
+          message={this.state.message}
+          messages={this.state.messages}
+          onMessageChange={(e: any) => this.setState({ message: e.target.value })}
+          onSendMessage={this.sendMessage}
+        />
       </Centered>
     );
   }

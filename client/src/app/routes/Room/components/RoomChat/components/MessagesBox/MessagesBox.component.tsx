@@ -1,10 +1,22 @@
 import React from 'react';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import styles from './styles';
 import './MessageBox.component.css';
+import { MessageBoxProps, MessageItem } from '../../types';
+import SingleMessage from '../SingleMessage/SingleMessage.component';
 
-function MessagesBox(props: WithStyles<typeof styles>) {
+function MessagesBox({ message, messages, onMessageChange, onSendMessage }: MessageBoxProps) {
+  const handleSendMessage = () => {
+    onSendMessage();
+    setTimeout(() => {
+      const objDiv = document.getElementById("inner");
+      if (objDiv) {
+        objDiv.scrollTop = objDiv.scrollHeight;
+      }
+    })
+  };
+
   return (
     <div className="wrapper">
       <nav className="nav" id="nav">
@@ -20,48 +32,25 @@ function MessagesBox(props: WithStyles<typeof styles>) {
       </nav>
       <div className="inner" id="inner">
         <div className="content" id="content">
-          <div className="message-wrapper them">
-            <div className="circle-wrapper animated bounceIn"></div>
-            <div className="text-wrapper animated fadeIn">Hello there!</div>
-          </div>
-          <div className="message-wrapper them">
-            <div className="circle-wrapper animated bounceIn"></div>
-            <div className="text-wrapper animated fadeIn">Hello there!</div>
-          </div>
-          <div className="message-wrapper them">
-            <div className="circle-wrapper animated bounceIn"></div>
-            <div className="text-wrapper animated fadeIn">Hello there!</div>
-          </div>
-
-          <div className="message-wrapper me">
-            <div className="circle-wrapper animated bounceIn"></div>
-            <div className="text-wrapper animated fadeIn">Hello there!</div>
-          </div>
-
-          <div className="message-wrapper me">
-            <div className="circle-wrapper animated bounceIn"></div>
-            <div className="text-wrapper animated fadeIn">Hello there!</div>
-          </div>
-
-          <div className="message-wrapper me">
-            <div className="circle-wrapper animated bounceIn"></div>
-            <div className="text-wrapper animated fadeIn">Hello there!</div>
-          </div>
-
-          <div className="message-wrapper me">
-            <div className="circle-wrapper animated bounceIn"></div>
-            <div className="text-wrapper animated fadeIn">Hello there!</div>
-          </div>
-
-          <div className="message-wrapper me">
-            <div className="circle-wrapper animated bounceIn"></div>
-            <div className="text-wrapper animated fadeIn">Hello there!</div>
-          </div>
+          {messages && messages.map((messageItem: MessageItem, index: number) => (
+            <SingleMessage
+              key={index}
+              message={messageItem.message}
+              mineMessage={false}
+              author={messageItem.author}
+            />
+          ))}
         </div>
       </div>
       <div className="bottom" id="bottom">
-        <textarea className="input" id="input" />
-        <div className="send" id="send" />
+        <textarea
+          className="input"
+          id="input"
+          value={message}
+          onChange={onMessageChange}
+          onKeyDown={e => e.keyCode === 13 && !e.shiftKey && handleSendMessage()}
+        />
+        <div className="send" id="send" onClick={handleSendMessage} />
       </div>
     </div>
   )
