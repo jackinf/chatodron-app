@@ -17,4 +17,5 @@ export interface MessageBoxProps extends WithStyles<typeof styles> {
   messages: Array<{ author: string; message: string}>;
   onMessageChange: (ev: any) => void;
   onSendMessage: () => void;
+  socketId: string;
 }

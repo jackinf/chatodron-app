@@ -5,16 +5,19 @@ import styles from './styles';
 import './MessageBox.component.css';
 import { MessageBoxProps, MessageItem } from '../../types';
 import SingleMessage from '../SingleMessage/SingleMessage.component';
+import scrollToBottomOfDiv from '../../helpers/scrollToBottomOfDiv';
+import { messageContainerDiv } from '../../constants';
 
-function MessagesBox({ message, messages, onMessageChange, onSendMessage }: MessageBoxProps) {
+function MessagesBox({
+  message,
+  messages,
+  onMessageChange,
+  onSendMessage,
+  socketId,
+}: MessageBoxProps) {
   const handleSendMessage = () => {
     onSendMessage();
-    setTimeout(() => {
-      const objDiv = document.getElementById("inner");
-      if (objDiv) {
-        objDiv.scrollTop = objDiv.scrollHeight;
-      }
-    })
+    scrollToBottomOfDiv(messageContainerDiv);
   };
 
   return (
@@ -30,13 +33,13 @@ function MessagesBox({ message, messages, onMessageChange, onSendMessage }: Mess
           </div>
         </div>
       </nav>
-      <div className="inner" id="inner">
+      <div className="inner" id={messageContainerDiv}>
         <div className="content" id="content">
           {messages && messages.map((messageItem: MessageItem, index: number) => (
             <SingleMessage
               key={index}
-              message={messageItem.message}
-              mineMessage={false}
+              message={`${messageItem.author}: ${messageItem.message}`}
+              mineMessage={messageItem.author === socketId}
               author={messageItem.author}
             />
           ))}

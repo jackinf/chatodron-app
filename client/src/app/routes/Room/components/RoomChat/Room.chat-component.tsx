@@ -14,13 +14,8 @@ import Centered from '../../../../../components/Centered';
 import { REDUCER_NAME__APP } from '../../../../App.reducer';
 import { Config } from '../../../../App.types';
 import RoomApi from "../../../../apis/Room.api";
-
-function mapStateToProps(state: any) {
-  const { loading, item } = state[REDUCER_NAME__ROOM];
-  const { config } = state[REDUCER_NAME__APP];
-  return { loading, item, config };
-}
-const mapDispatchToProps = { start, getLastNMessages };
+import scrollToBottomOfDiv from './helpers/scrollToBottomOfDiv';
+import { messageContainerDiv } from './constants';
 
 interface RoomChatProps { start: Function, getLastNMessages: Function, loading: boolean, item?: any, config: Config }
 export interface RoomChatState {
@@ -43,7 +38,10 @@ class RoomChat extends Component<Props, RoomChatState> {
     super(props);
 
     this.socket = io(props.config.backendHost);
-    this.socket.on('RECEIVE_MESSAGE', (data: any) => this.addMessage(data));
+    this.socket.on('RECEIVE_MESSAGE', (data: any) => {
+      this.setState({ messages: [...this.state.messages, data]});
+      scrollToBottomOfDiv(messageContainerDiv);
+    });
     this.socket.on('ROOM_PARTICIPANTS', ({ activeUsers }: { activeUsers: Array<string> }) => {
       console.log('activeSockets', activeUsers);
       this.setState({ users: Object.keys(activeUsers) });
@@ -60,9 +58,6 @@ class RoomChat extends Component<Props, RoomChatState> {
     }
   }
 
-  addMessage = (data: any) => {
-    this.setState({ messages: [...this.state.messages, data]});
-  };
   load = async () => {
     await this.props.start(this.props.match.params.id, (room: string) => {
       this.socket.emit('ENTER_ROOM', { room });
@@ -72,6 +67,7 @@ class RoomChat extends Component<Props, RoomChatState> {
         .then((messages: any[]) => this.setState({ messages: messages.reverse() }))
     });
   };
+
   sendMessage = (ev?: any) => {
     ev && ev.preventDefault();
     this.socket.emit('SEND_MESSAGE', {
@@ -83,8 +79,9 @@ class RoomChat extends Component<Props, RoomChatState> {
 
   render() {
     const { loading, item } = this.props;
+    const socketId = this.socket && this.socket.id;
 
-    if (loading || !item) {
+    if (loading || !item || !socketId) {
       return <div>Loading</div>
     }
 
@@ -101,11 +98,21 @@ class RoomChat extends Component<Props, RoomChatState> {
           messages={this.state.messages}
           onMessageChange={(e: any) => this.setState({ message: e.target.value })}
           onSendMessage={this.sendMessage}
+          socketId={socketId}
         />
       </Centered>
     );
   }
 }
+
+function mapStateToProps(state: any) {
+  const { loading, item } = state[REDUCER_NAME__ROOM];
+  const { config } = state[REDUCER_NAME__APP];
+  return { loading, item, config };
+}
+
+// noinspection JSUnusedGlobalSymbols
+const mapDispatchToProps = { start, getLastNMessages };
 
 export default connect(
   mapStateToProps,
