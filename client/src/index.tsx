@@ -6,13 +6,11 @@ import { ConnectedRouter } from 'connected-react-router'
 
 import * as serviceWorker from './serviceWorker';
 import configureStore, { history } from './createAppStore';
-import AppComponent from './app/App.component';
+import AppComponent from './app/Root';
 import {start} from './app/actions';
 import './index.css';
 
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
-// import 'react-select/dist/react-select.css';
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 // @ts-ignore
 export const store = configureStore(window['__INITIAL_STATE__']);

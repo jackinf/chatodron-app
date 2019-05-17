@@ -2,7 +2,7 @@ import actionCreatorFactory from 'typescript-fsa';
 import { Dispatch } from 'redux';
 import { toastr } from 'react-redux-toastr';
 
-import { ErrorWrapper } from '../../../../viewModels/base';
+import { ErrorWrapper } from '../../../../types/base';
 import CommonUtilities from "../../../../helpers/CommonUtilities";
 import RoomApi, {RoomApiUpdatePayload} from "../../../apis/Room.api";
 import { FormValues as RoomEditFormValues } from '../../EditRoom/types';

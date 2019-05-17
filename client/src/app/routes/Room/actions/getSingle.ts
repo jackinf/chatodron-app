@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import RoomApi from "../../../apis/Room.api";
-import {ErrorWrapper} from "../../../../viewModels/base";
+import {ErrorWrapper} from "../../../../types/base";
 import {toastr} from "react-redux-toastr";
 import CommonUtilities from "../../../../helpers/CommonUtilities";
 import actionCreatorFactory from "typescript-fsa";

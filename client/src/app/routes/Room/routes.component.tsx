@@ -7,24 +7,24 @@ import {store} from "../../../index";
 export default () => (
   <Switch>
     <Route exact={true} path={'/rooms/new'} component={AsyncComponent(async () => {
-      const reducer = await import('./Room.reducer');
+      const reducer = await import('./reducer');
       injectAsyncReducer(store, reducer.REDUCER_NAME__ROOM, reducer.default);
-      return await import('../CreateRoom/Room.create-component');
+      return await import('../CreateRoom/CreateRoom');
     })}/>
     <Route exact={true} path={'/rooms/:id'} component={AsyncComponent(async () => {
-      const reducer = await import('./Room.reducer');
+      const reducer = await import('./reducer');
       injectAsyncReducer(store, reducer.REDUCER_NAME__ROOM, reducer.default);
-      return await import('./Room.component');
+      return await import('./Room');
     })}/>
     <Route path={'/rooms/:id/edit'} component={AsyncComponent(async () => {
-      const reducer = await import('./Room.reducer');
+      const reducer = await import('./reducer');
       injectAsyncReducer(store, reducer.REDUCER_NAME__ROOM, reducer.default);
-      return await import('../EditRoom/Room.edit-component');
+      return await import('../EditRoom/EditRoom');
     })}/>
     <Route path={'/rooms/:id/chat'} component={AsyncComponent(async () => {
-      const reducer = await import('./Room.reducer');
+      const reducer = await import('./reducer');
       injectAsyncReducer(store, reducer.REDUCER_NAME__ROOM, reducer.default);
-      return await import('../ChatRoom/Room.chat-component');
+      return await import('../ChatRoom/ChatRoom');
     })}/>
   </Switch>
 );

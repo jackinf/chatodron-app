@@ -2,10 +2,10 @@ import actionCreatorFactory from 'typescript-fsa';
 import { Dispatch } from 'redux';
 import { toastr } from 'react-redux-toastr';
 
-import { ErrorWrapper } from '../../../../viewModels/base';
+import { ErrorWrapper } from '../../../../types/base';
 import CommonUtilities from "../../../../helpers/CommonUtilities";
-import {RoomCreateState} from "../../CreateRoom/Room.create-component";
 import RoomsApi, {RoomApiAddPayload} from "../../../apis/Room.api";
+import { FormValues } from '../../CreateRoom/types';
 
 const actionCreator = actionCreatorFactory();
 
@@ -25,7 +25,7 @@ export const startActions = actionCreator.async<{}, {}, ErrorWrapper>('ROOM/CREA
  */
 export const submitActions = actionCreator.async<{}, {}, ErrorWrapper>('ROOM/CREATE/SUBMIT');
 
-export default function submit(formValues: RoomCreateState, onSuccess: Function) {
+export default function submit(formValues: FormValues, onSuccess: Function) {
   return async (dispatch: Dispatch<any>) => {
 
     async function mainAction() {

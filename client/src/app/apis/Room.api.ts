@@ -1,4 +1,3 @@
-import {RoomType} from "../types/Room.type";
 import {PaginationType} from "../types/Pagination.type";
 
 export class RoomApiAddPayload {

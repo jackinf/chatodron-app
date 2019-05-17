@@ -1,5 +1,5 @@
 import { WithStyles } from '@material-ui/core';
-import styles from './components/MessagesBox/styles';
+import styles from './components/ChatWindow/styles';
 
 export interface MessageItem {
   author: string;

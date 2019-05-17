@@ -2,7 +2,7 @@ import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import styles from './styles';
-import './MessageBox.component.css';
+import './ChatWindow.css';
 import { MessageBoxProps, MessageItem } from '../../types';
 import SingleMessage from '../SingleMessage/SingleMessage.component';
 import scrollToBottomOfDiv from '../../helpers/scrollToBottomOfDiv';

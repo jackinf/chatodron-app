@@ -1,1 +1,1 @@
-export { default } from './Room.edit-component';
+export { default } from './EditRoom';

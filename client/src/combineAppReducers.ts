@@ -5,7 +5,7 @@ import { i18nReducer } from 'react-redux-i18n';
 import { History } from "history";
 import { connectRouter } from 'connected-react-router'
 
-import { default as authReducer, REDUCER_NAME__APP } from "./app/App.reducer";
+import { default as authReducer, REDUCER_NAME__APP } from "./app/reducer";
 
 const conf: any = {
   form: formReducer,

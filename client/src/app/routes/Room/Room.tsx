@@ -10,8 +10,8 @@ import Button from "@material-ui/core/Button";
 import {
   start,
   submit
-} from './actions/Room.udpate-single.actions';
-import {REDUCER_NAME__ROOM} from "./Room.reducer";
+} from './actions/updateSingle';
+import {REDUCER_NAME__ROOM} from "./reducer";
 import Centered from '../../../components/Centered';
 import { roomRoutes } from '../constants';
 

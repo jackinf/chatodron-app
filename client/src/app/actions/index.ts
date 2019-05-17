@@ -1,4 +1,4 @@
-import start from './App.start.action';
+import start from './start';
 
 export {
   start,

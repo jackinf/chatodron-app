@@ -1,8 +1,8 @@
 import { Action } from 'redux';
 import { isType } from 'typescript-fsa';
-import { asyncActions as startActions } from './actions/App.start.action';
-import {ErrorWrapper} from "../viewModels/base";
-import { Config } from './App.types';
+import { asyncActions as startActions } from './actions/start';
+import { ErrorWrapper } from "../types/base";
+import { Config } from './types';
 
 export const REDUCER_NAME__APP = 'app';
 export interface AppReduxState {
@@ -19,7 +19,6 @@ const defaultState: AppReduxState = {
 };
 export default (state: AppReduxState = defaultState, action: Action) => {
 
-  // Set or unset user
   if (isType(action, startActions.started)) {
     return {...state, type: action.type};
   }

@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import { toastr } from 'react-redux-toastr';
 
 import CommonUtilities from '../../../../helpers/CommonUtilities';
-import { ErrorWrapper } from '../../../../viewModels/base';
+import { ErrorWrapper } from '../../../../types/base';
 import RoomApi from "../../../apis/Room.api";
 import {RoomsTableData} from "./Rooms.types";
 

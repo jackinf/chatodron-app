@@ -2,9 +2,9 @@ import actionCreatorFactory from 'typescript-fsa';
 import { Dispatch } from 'redux';
 import { toastr } from 'react-redux-toastr';
 
-import { ErrorWrapper } from '../../viewModels/base';
+import { ErrorWrapper } from '../../types/base';
 import CommonUtils from '../../helpers/CommonUtilities';
-import { Config } from '../App.types';
+import { Config } from '../types';
 
 const actionCreator = actionCreatorFactory();
 export const asyncActions = actionCreator.async<
