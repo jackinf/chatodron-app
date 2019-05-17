@@ -9,8 +9,7 @@ import Button from "@material-ui/core/Button";
 
 import {
   start,
-  submit
-} from './actions/updateSingle';
+} from '../EditRoom/actions/updateSingle';
 import {REDUCER_NAME__ROOM} from "./reducer";
 import Centered from '../../../components/Centered';
 import { roomRoutes } from '../constants';
@@ -19,7 +18,7 @@ function mapStateToProps(state: any) {
   const { loading, item } = state[REDUCER_NAME__ROOM];
   return { loading, item };
 }
-const mapDispatchToProps = { start, submit };
+const mapDispatchToProps = { start };
 
 const styles = (theme: Theme): StyleRules => ({
   container: {

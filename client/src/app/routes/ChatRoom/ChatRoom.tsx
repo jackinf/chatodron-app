@@ -7,15 +7,15 @@ import { withRouter } from "react-router";
 import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/styles/withStyles";
 
 import MessagesBox from './components/ChatWindow';
-import { start } from '../Room/actions/getSingle';
-import { getLastNMessages } from '../Room/actions/getLastNMessages';
-import {REDUCER_NAME__ROOM} from "../Room/reducer";
+import { start } from './actions/getSingle';
+import { getLastNMessages } from './actions/getLastNMessages';
 import Centered from '../../../components/Centered';
 import { REDUCER_NAME__APP } from '../../reducer';
 import { Config } from '../../types';
 import RoomApi from "../../apis/Room.api";
 import scrollToBottomOfDiv from './helpers/scrollToBottomOfDiv';
 import { messageContainerDiv } from './constants';
+import { REDUCER_NAME__CHAT_ROOM } from './reducer';
 
 interface RoomChatProps { start: Function, getLastNMessages: Function, loading: boolean, item?: any, config: Config }
 export interface RoomChatState {
@@ -106,7 +106,7 @@ class ChatRoom extends Component<Props, RoomChatState> {
 }
 
 function mapStateToProps(state: any) {
-  const { loading, item } = state[REDUCER_NAME__ROOM];
+  const { loading, item } = state[REDUCER_NAME__CHAT_ROOM];
   const { config } = state[REDUCER_NAME__APP];
   return { loading, item, config };
 }

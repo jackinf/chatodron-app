@@ -1,1 +1,1 @@
-export { default } from "./routes.component";
+export { default } from "./async";

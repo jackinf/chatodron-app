@@ -6,7 +6,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 import { withRouter } from "react-router-dom";
 
-import createSingle from '../Room/actions/createSingle';
+import createSingle from './actions/createSingle';
 import Centered from '../../../components/Centered';
 import { CreateRoomProps, FormValues } from './types';
 import style from './style';

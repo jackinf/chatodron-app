@@ -1,12 +1,12 @@
 import { Action } from 'redux';
 import { isType } from 'typescript-fsa';
-import { asyncActions as FetchActions } from './actions/Rooms.get-list.actions';
+import { asyncActions as FetchActions } from './actions/getList';
 import { ErrorWrapper } from "../../../types/base";
 import {
   cancel as deleteCancel,
   startActions as deleteStartActions,
   submitActions as deleteSubmitActions
-} from "./actions/Rooms.delete-single.actions";
+} from "./actions/deleteSingle";
 
 export const REDUCER_NAME__ROOMS = 'rooms';
 

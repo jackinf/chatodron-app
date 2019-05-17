@@ -9,15 +9,15 @@ import Button from "@material-ui/core/Button";
 import {
   start,
   submit
-} from '../Room/actions/updateSingle';
-import {REDUCER_NAME__ROOM} from "../Room/reducer";
+} from './actions/updateSingle';
 import Centered from '../../../components/Centered';
 import { roomRoutes } from '../constants';
 import { FormValues, Props } from './types';
 import styles from './styles';
+import { REDUCER_NAME__EDIT_ROOM } from './reducer';
 
 function mapStateToProps(state: any) {
-  const { loading, item } = state[REDUCER_NAME__ROOM];
+  const { loading, item } = state[REDUCER_NAME__EDIT_ROOM];
   return { loading, item };
 }
 const mapDispatchToProps = { start, submit };

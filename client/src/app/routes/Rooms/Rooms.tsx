@@ -6,11 +6,11 @@ import withStyles, { StyleRules, WithStyles } from '@material-ui/core/styles/wit
 import {Theme} from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 
-import getList from "./actions/Rooms.get-list.actions";
-import { submit as remove } from "./actions/Rooms.delete-single.actions";
-import { REDUCER_NAME__ROOMS } from "./Rooms.reducer";
+import getList from "./actions/getList";
+import { submit as remove } from "./actions/deleteSingle";
+import { REDUCER_NAME__ROOMS } from "./reducer";
 import RoomsTable from "./components/RoomsTable";
-import {RoomsTableData} from "./actions/Rooms.types";
+import {RoomsTableData} from "./types";
 import Centered from '../../../components/Centered';
 import { roomRoutes } from '../constants';
 

@@ -4,7 +4,7 @@ import { toastr } from 'react-redux-toastr';
 
 import { ErrorWrapper } from '../../../../types/base';
 import CommonUtilities from "../../../../helpers/CommonUtilities";
-import { RoomsReduxState, REDUCER_NAME__ROOMS } from "../Rooms.reducer";
+import { RoomsReduxState, REDUCER_NAME__ROOMS } from "../reducer";
 import RoomApi from "../../../apis/Room.api";
 
 const actionCreator = actionCreatorFactory();

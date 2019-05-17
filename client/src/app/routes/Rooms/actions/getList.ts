@@ -5,7 +5,7 @@ import { toastr } from 'react-redux-toastr';
 import CommonUtilities from '../../../../helpers/CommonUtilities';
 import { ErrorWrapper } from '../../../../types/base';
 import RoomApi from "../../../apis/Room.api";
-import {RoomsTableData} from "./Rooms.types";
+import {RoomsTableData} from "../types";
 
 const actionCreator = actionCreatorFactory();
 export const asyncActions = actionCreator.async<

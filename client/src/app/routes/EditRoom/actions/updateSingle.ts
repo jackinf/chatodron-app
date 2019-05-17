@@ -5,7 +5,7 @@ import { toastr } from 'react-redux-toastr';
 import { ErrorWrapper } from '../../../../types/base';
 import CommonUtilities from "../../../../helpers/CommonUtilities";
 import RoomApi, {RoomApiUpdatePayload} from "../../../apis/Room.api";
-import { FormValues as RoomEditFormValues } from '../../EditRoom/types';
+import { FormValues as RoomEditFormValues } from '../types';
 
 const actionCreator = actionCreatorFactory();
 
