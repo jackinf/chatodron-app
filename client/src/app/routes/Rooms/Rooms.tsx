@@ -1,18 +1,18 @@
-import React, {Component} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Fab from '@material-ui/core/Fab';
-import withStyles, { StyleRules, WithStyles } from '@material-ui/core/styles/withStyles';
-import {Theme} from "@material-ui/core";
+import withStyles from '@material-ui/core/styles/withStyles';
 import AddIcon from '@material-ui/icons/Add';
 
 import getList from "./actions/getList";
 import { submit as remove } from "./actions/deleteSingle";
 import { REDUCER_NAME__ROOMS } from "./reducer";
 import RoomsTable from "./components/RoomsTable";
-import {RoomsTableData} from "./types";
+import { Props } from './types';
 import Centered from '../../components/Centered';
 import { roomRoutes } from '../../constants';
+import styles from './styles';
 
 function mapStateToProps(state: any) {
   const { tableData, loading } = state[REDUCER_NAME__ROOMS];
@@ -24,57 +24,33 @@ function mapStateToProps(state: any) {
 
 const mapDispatchToProps = { getList, remove };
 
-const styles = (theme: Theme): StyleRules => ({
-  wrapper: {
-  },
+function Rooms(props: Props) {
+  useEffect(() => {
+    props.getList();
+  }, []);
 
-  main: {
-    flexGrow: 1,
-  },
+  const { tableData, getList, classes, remove, history } = props;
 
-  addButton: {
-    position: "fixed",
-    bottom: theme.spacing.unit * 15,
-    right: theme.spacing.unit * 2,
-  },
-});
+  const handleGoToAddItemPage = () => history.push(roomRoutes.newRoom());
+  const handleRemove = () => remove();
 
-interface RoomsProps extends WithStyles<typeof styles> {
-  tableData: RoomsTableData,
-  loading: boolean,
-
-  getList: Function,
-  remove: Function
-}
-class Rooms extends Component<RoomsProps & RouteComponentProps<{}>> {
-  async componentDidMount() {
-    await this.props.getList();
-  }
-
-  goToAddItemPage = () => this.props.history.push(roomRoutes.newRoom());
-  remove = () => this.props.remove();
-
-  render() {
-    const { tableData, getList, classes } = this.props;
-
-    return (
-      <>
-        <Centered>
-          <RoomsTable
-            getList={getList}
-            confirmDelete={this.props.remove}
-            page={tableData.page}
-            limit={tableData.limit}
-            docs={tableData.docs}
-            total={tableData.total}
-          />
-        </Centered>
-        <Fab className={classes.addButton} color="secondary">
-          <AddIcon onClick={this.goToAddItemPage} />
-        </Fab>
-      </>
-    );
-  }
+  return (
+    <>
+      <Centered>
+        <RoomsTable
+          getList={getList}
+          confirmDelete={handleRemove}
+          page={tableData.page}
+          limit={tableData.limit}
+          docs={tableData.docs}
+          total={tableData.total}
+        />
+      </Centered>
+      <Fab className={classes.addButton} color="secondary">
+        <AddIcon onClick={handleGoToAddItemPage} />
+      </Fab>
+    </>
+  );
 }
 
 export default connect(

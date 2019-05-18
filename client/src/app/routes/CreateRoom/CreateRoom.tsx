@@ -43,6 +43,6 @@ function CreateRoom(props: CreateRoomProps) {
 }
 
 export default connect(
-  () => {},
+  () => ({}),
   { createSingle }
 )(withStyles(style)(withRouter(CreateRoom)));
