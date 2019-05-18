@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
-import RoomApi from "../../../apis/Room.api";
-import {ErrorWrapper} from "../../../../types/base";
+import RoomApi from "../../../apis/RoomApi";
+import {ErrorWrapper} from "../../../types";
 import actionCreatorFactory from "typescript-fsa";
 
 const actionCreator = actionCreatorFactory();

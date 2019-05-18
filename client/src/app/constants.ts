@@ -1,3 +1,7 @@
+export const routePaths = {
+  login: '/login',
+};
+
 export const roomRoutes = {
   newRoom: () => 'rooms/new',
   chat: (id: string) => `/rooms/${id}/chat`,

@@ -2,9 +2,9 @@ import actionCreatorFactory from 'typescript-fsa';
 import { Dispatch } from 'redux';
 import { toastr } from 'react-redux-toastr';
 
-import CommonUtilities from '../../../../helpers/CommonUtilities';
-import { ErrorWrapper } from '../../../../types/base';
-import RoomApi from "../../../apis/Room.api";
+import CommonUtilities from '../../../helpers/CommonUtilities';
+import { ErrorWrapper } from '../../../types';
+import RoomApi from "../../../apis/RoomApi";
 import {RoomsTableData} from "../types";
 
 const actionCreator = actionCreatorFactory();

@@ -9,10 +9,10 @@ import withStyles, {StyledComponentProps, StyleRules} from "@material-ui/core/st
 import MessagesBox from './components/ChatWindow';
 import { start } from './actions/getSingle';
 import { getLastNMessages } from './actions/getLastNMessages';
-import Centered from '../../../components/Centered';
+import Centered from '../../components/Centered';
 import { REDUCER_NAME__APP } from '../../reducer';
 import { Config } from '../../types';
-import RoomApi from "../../apis/Room.api";
+import RoomApi from "../../apis/RoomApi";
 import scrollToBottomOfDiv from './helpers/scrollToBottomOfDiv';
 import { messageContainerDiv } from './constants';
 import { REDUCER_NAME__CHAT_ROOM } from './reducer';

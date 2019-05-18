@@ -24,12 +24,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-import { RoomType } from '../../../../types/Room.type';
-import { defaultMargin } from '../../../../../helpers/styles/layoutHelper';
+import { RoomType } from '../../types';
+import { defaultMargin } from '../../../../helpers/layoutHelper';
 import { ITEM_HEIGHT } from '../../constants';
 import RoomsTablePaginationActions from '../RoomsTablePaginationActions';
 import { DEFAULT_LIMIT, DEFAULT_TOTAL } from './constants';
-import { roomRoutes } from '../../../constants';
+import { roomRoutes } from '../../../../constants';
 
 const styles = (theme: Theme): StyleRules => ({
   root: {

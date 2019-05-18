@@ -2,8 +2,8 @@ import actionCreatorFactory from 'typescript-fsa';
 import { Dispatch } from 'redux';
 import { toastr } from 'react-redux-toastr';
 
-import { ErrorWrapper } from '../../types/base';
-import CommonUtils from '../../helpers/CommonUtilities';
+import { ErrorWrapper } from '../types';
+import CommonUtils from '../helpers/CommonUtilities';
 import { Config } from '../types';
 
 const actionCreator = actionCreatorFactory();

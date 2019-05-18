@@ -11,8 +11,8 @@ import {
   start,
 } from '../EditRoom/actions/updateSingle';
 import {REDUCER_NAME__ROOM} from "./reducer";
-import Centered from '../../../components/Centered';
-import { roomRoutes } from '../constants';
+import Centered from '../../components/Centered';
+import { roomRoutes } from '../../constants';
 
 function mapStateToProps(state: any) {
   const { loading, item } = state[REDUCER_NAME__ROOM];

@@ -1,4 +1,7 @@
-import {RoomType} from "../../types/Room.type";
+export interface RoomType {
+  _id: string;
+  name: string;
+}
 
 export interface TableData<TDoc> {
   docs: Array<TDoc>

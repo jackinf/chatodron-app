@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import { isType } from 'typescript-fsa';
 import { asyncActions as startActions } from './actions/start';
-import { ErrorWrapper } from "../types/base";
+import { ErrorWrapper } from "./types";
 import { Config } from './types';
 
 export const REDUCER_NAME__APP = 'app';

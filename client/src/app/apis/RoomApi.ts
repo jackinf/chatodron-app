@@ -1,4 +1,4 @@
-import {PaginationType} from "../types/Pagination.type";
+import { PaginationType } from "./types";
 
 export class RoomApiAddPayload {
   readonly name: string;

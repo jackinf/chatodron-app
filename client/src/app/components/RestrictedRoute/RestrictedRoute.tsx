@@ -1,5 +1,5 @@
 import { Redirect, Route } from 'react-router';
-import { routePaths } from '../../../constants/api.constants';
+import { routePaths } from '../../constants';
 import * as React from 'react';
 
 const RestrictedRoute = ({component: Component, ...rest}: any) =>

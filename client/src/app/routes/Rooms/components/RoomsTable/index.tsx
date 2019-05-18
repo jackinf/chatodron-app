@@ -1,1 +1,1 @@
-export { default } from './Rooms.table.component';
+export { default } from './RoomsTable';

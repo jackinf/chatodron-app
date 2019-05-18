@@ -18,7 +18,7 @@ const styles = (theme: Theme): StyleRules => ({
   },
 });
 
-class RoomsTablePaginationActionsComponent extends React.Component<TablePaginationActionsProps
+class RoomsTablePaginationActions extends React.Component<TablePaginationActionsProps
   & WithStyles<typeof styles> & WithTheme> {
   handleFirstPageButtonClick = (event: any) => {
     this.props.onChangePage(event, 0);
@@ -78,5 +78,5 @@ class RoomsTablePaginationActionsComponent extends React.Component<TablePaginati
 }
 
 export default withStyles(styles, {withTheme: true})(
-  RoomsTablePaginationActionsComponent,
+  RoomsTablePaginationActions,
 );

@@ -1,4 +1,5 @@
-import { ErrorWrapper } from '../types/base';
+import styles from './styles';
+import { WithStyles } from '@material-ui/core';
 
 export interface Config {
   backendHost: string;
@@ -10,4 +11,19 @@ export interface RootStateProps {
   error?: ErrorWrapper;
   isLoggedIn: boolean;
 }
-export type RootProps = RootDispatchProps & RootStateProps;
+export type RootProps = RootDispatchProps & RootStateProps & WithStyles<typeof styles>;
+
+export interface ServiceResult<T> {
+  payload: T;
+  isSuccessful: boolean;
+}
+
+export class ErrorWrapper {
+  title: string;
+  description: string;
+
+  constructor(title: string, description?: string) {
+    this.title = title;
+    this.description = description || '';
+  }
+}

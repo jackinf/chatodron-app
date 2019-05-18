@@ -1,5 +1,5 @@
 import { animateScroll } from 'react-scroll';
-import {ErrorWrapper} from "../types/base";
+import {ErrorWrapper} from "../types";
 
 export default class CommonUtilities {
   public static ReactScrollDefaultOptions = { duration: 500, smooth: 'easeInOutQuint' };

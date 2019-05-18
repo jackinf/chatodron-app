@@ -2,9 +2,9 @@ import actionCreatorFactory from 'typescript-fsa';
 import { Dispatch } from 'redux';
 import { toastr } from 'react-redux-toastr';
 
-import { ErrorWrapper } from '../../../../types/base';
-import CommonUtilities from "../../../../helpers/CommonUtilities";
-import RoomApi, {RoomApiUpdatePayload} from "../../../apis/Room.api";
+import { ErrorWrapper } from '../../../types';
+import CommonUtilities from "../../../helpers/CommonUtilities";
+import RoomApi, {RoomApiUpdatePayload} from "../../../apis/RoomApi";
 import { FormValues as RoomEditFormValues } from '../types';
 
 const actionCreator = actionCreatorFactory();

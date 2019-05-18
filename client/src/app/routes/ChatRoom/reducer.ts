@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { ErrorWrapper } from "../../../types/base";
+import { ErrorWrapper } from "../../types";
 import {
   startActions as getSingleActions
 } from './actions/getSingle';

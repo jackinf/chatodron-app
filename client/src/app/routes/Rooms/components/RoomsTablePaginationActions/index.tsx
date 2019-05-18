@@ -1,1 +1,1 @@
-export { default } from './RoomsTablePaginationActions.component';
+export { default } from './RoomsTablePaginationActions';

@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import { isType } from 'typescript-fsa';
 import { asyncActions as FetchActions } from './actions/getList';
-import { ErrorWrapper } from "../../../types/base";
+import { ErrorWrapper } from "../../types";
 import {
   cancel as deleteCancel,
   startActions as deleteStartActions,

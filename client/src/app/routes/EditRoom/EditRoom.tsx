@@ -10,8 +10,8 @@ import {
   start,
   submit
 } from './actions/updateSingle';
-import Centered from '../../../components/Centered';
-import { roomRoutes } from '../constants';
+import Centered from '../../components/Centered';
+import { roomRoutes } from '../../constants';
 import { FormValues, Props } from './types';
 import styles from './styles';
 import { REDUCER_NAME__EDIT_ROOM } from './reducer';

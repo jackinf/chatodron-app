@@ -5,7 +5,7 @@ import {
   startActions as editStartActions,
   submitActions as editSubmitActions
 } from './actions/updateSingle';
-import { ErrorWrapper } from "../../../types/base";
+import { ErrorWrapper } from "../../types";
 
 export const REDUCER_NAME__EDIT_ROOM = 'editRoom';
 

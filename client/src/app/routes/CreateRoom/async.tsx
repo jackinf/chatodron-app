@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import AsyncComponent from "../../../helpers/AsyncComponent";
+import AsyncComponent from "../../components/AsyncComponent";
 import { injectAsyncReducer } from "../../../createAppStore";
 import { store } from "../../../index";
 

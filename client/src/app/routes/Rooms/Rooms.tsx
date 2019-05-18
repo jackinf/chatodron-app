@@ -11,8 +11,8 @@ import { submit as remove } from "./actions/deleteSingle";
 import { REDUCER_NAME__ROOMS } from "./reducer";
 import RoomsTable from "./components/RoomsTable";
 import {RoomsTableData} from "./types";
-import Centered from '../../../components/Centered';
-import { roomRoutes } from '../constants';
+import Centered from '../../components/Centered';
+import { roomRoutes } from '../../constants';
 
 function mapStateToProps(state: any) {
   const { tableData, loading } = state[REDUCER_NAME__ROOMS];

@@ -3,7 +3,7 @@ import { isType } from 'typescript-fsa';
 import {
   startActions as editStartActions,
 } from '../EditRoom/actions/updateSingle';
-import { ErrorWrapper } from "../../../types/base";
+import { ErrorWrapper } from "../../types";
 
 export const REDUCER_NAME__ROOM = 'room';
 

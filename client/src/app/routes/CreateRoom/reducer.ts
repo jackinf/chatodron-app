@@ -4,7 +4,7 @@ import {
   cancel as createCancel,
   submitActions as createSubmitActions
 } from './actions/createSingle';
-import { ErrorWrapper } from "../../../types/base";
+import { ErrorWrapper } from "../../types";
 
 export const REDUCER_NAME__CREATE_ROOM = 'createRoom';
 
