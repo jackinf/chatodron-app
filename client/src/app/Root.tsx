@@ -18,56 +18,53 @@ import ChatRoomRoutes from './routes/ChatRoom/async';
 import Footer from './components/Footer/Footer.component';
 import AsyncComponent from './components/AsyncComponent';
 
-class Root extends React.Component<RootProps> {
+function Root(props: RootProps) {
+  const {loading, error, isLoggedIn, classes} = props;
 
-  render() {
-    const {loading, error, isLoggedIn, classes} = this.props;
-
-    if (loading) {
-      return <div className="loader spin"/>;
-    }
-    if (isLoggedIn && error) {
-      return <div>[ERROR] {error.title}: {error.description}</div>;
-    }
-
-    return (
-      <div className={`app-main ${!isLoggedIn ? '' : ''}`}>
-        <Switch>
-          {isLoggedIn
-            ? <RestrictedRoute path={`/`} isLoggedIn={isLoggedIn} component={() => (
-              <div className={classes && classes.wrapper}>
-                <Centered>
-                  <Header/>
-                </Centered>
-                <span className={classes && classes.mainWrapper}>
-                  <Route exact={true} path={'/rooms'} component={AsyncComponent(RoomsRoutes)}/>
-                  <Switch>
-                    <Route exact={true} path={'/rooms/new'} component={AsyncComponent(CreateRoomRoutes)}/>
-                    <Route exact={true} path={'/rooms/:id'} component={AsyncComponent(RoomRoutes)}/>
-                    <Route path={'/rooms/:id/edit'} component={AsyncComponent(EditRoomRoutes)}/>
-                    <Route path={'/rooms/:id/chat'} component={AsyncComponent(ChatRoomRoutes)}/>
-                  </Switch>
-                </span>
-                <span className={classes && classes.footerWrapper}>
-                  <Footer/>
-                </span>
-              </div>
-            )}/>
-            : <Route path={'*'} component={asyncComponent(async () => await import('./routes/Auth'))}/>}
-        </Switch>
-
-        <ReduxToastr
-          timeOut={4000}
-          newestOnTop={false}
-          preventDuplicates={true}
-          position="top-center"
-          transitionIn="bounceInDown"
-          transitionOut="bounceOutUp"
-          progressBar={true}
-        />
-      </div>
-    );
+  if (loading) {
+    return <div className="loader spin"/>;
   }
+  if (isLoggedIn && error) {
+    return <div>[ERROR] {error.title}: {error.description}</div>;
+  }
+
+  return (
+    <div className={`app-main ${!isLoggedIn ? '' : ''}`}>
+      <Switch>
+        {isLoggedIn
+          ? <RestrictedRoute path={`/`} isLoggedIn={isLoggedIn} component={() => (
+            <div className={classes && classes.wrapper}>
+              <Centered>
+                <Header/>
+              </Centered>
+              <span className={classes && classes.mainWrapper}>
+                <Route exact={true} path={'/rooms'} component={AsyncComponent(RoomsRoutes)}/>
+                <Switch>
+                  <Route exact={true} path={'/rooms/new'} component={AsyncComponent(CreateRoomRoutes)}/>
+                  <Route exact={true} path={'/rooms/:id'} component={AsyncComponent(RoomRoutes)}/>
+                  <Route path={'/rooms/:id/edit'} component={AsyncComponent(EditRoomRoutes)}/>
+                  <Route path={'/rooms/:id/chat'} component={AsyncComponent(ChatRoomRoutes)}/>
+                </Switch>
+              </span>
+              <span className={classes && classes.footerWrapper}>
+                <Footer/>
+              </span>
+            </div>
+          )}/>
+          : <Route path={'*'} component={asyncComponent(async () => await import('./routes/Auth'))}/>}
+      </Switch>
+
+      <ReduxToastr
+        timeOut={4000}
+        newestOnTop={false}
+        preventDuplicates={true}
+        position="top-center"
+        transitionIn="bounceInDown"
+        transitionOut="bounceOutUp"
+        progressBar={true}
+      />
+    </div>
+  );
 }
 
 const mapStateToProps = (state: any): RootStateProps => {
