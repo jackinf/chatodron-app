@@ -17,6 +17,7 @@ import EditRoomRoutes from './routes/EditRoom/async';
 import ChatRoomRoutes from './routes/ChatRoom/async';
 import Footer from './components/Footer/Footer.component';
 import AsyncComponent from './components/AsyncComponent';
+import { AuthConsumer } from './routes/Authentication/AuthContext';
 
 function Root(props: RootProps) {
   const {loading, error, isLoggedIn, classes} = props;
@@ -30,14 +31,16 @@ function Root(props: RootProps) {
 
   return (
     <div className={`app-main ${!isLoggedIn ? '' : ''}`}>
-      <Switch>
-        {isLoggedIn
-          ? <RestrictedRoute path={`/`} isLoggedIn={isLoggedIn} component={() => (
-            <div className={classes && classes.wrapper}>
-              <Centered>
-                <Header/>
-              </Centered>
-              <span className={classes && classes.mainWrapper}>
+      <AuthConsumer>
+        {(loggedIn) => (
+          <Switch>
+            {isLoggedIn
+              ? <RestrictedRoute path={`/`} isLoggedIn={isLoggedIn} component={() => (
+                <div className={classes && classes.wrapper}>
+                  <Centered>
+                    <Header/>
+                  </Centered>
+                  <span className={classes && classes.mainWrapper}>
                 <Route exact={true} path={'/rooms'} component={AsyncComponent(RoomsRoutes)}/>
                 <Switch>
                   <Route exact={true} path={'/rooms/new'} component={AsyncComponent(CreateRoomRoutes)}/>
@@ -46,13 +49,15 @@ function Root(props: RootProps) {
                   <Route path={'/rooms/:id/chat'} component={AsyncComponent(ChatRoomRoutes)}/>
                 </Switch>
               </span>
-              <span className={classes && classes.footerWrapper}>
+                  <span className={classes && classes.footerWrapper}>
                 <Footer/>
               </span>
-            </div>
-          )}/>
-          : <Route path={'*'} component={asyncComponent(async () => await import('./routes/Auth'))}/>}
-      </Switch>
+                </div>
+              )}/>
+              : <Route path={'*'} component={asyncComponent(async () => await import('./routes/Authentication/Login'))}/>}
+          </Switch>
+        )}
+      </AuthConsumer>
 
       <ReduxToastr
         timeOut={4000}
