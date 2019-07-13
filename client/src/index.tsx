@@ -2,7 +2,10 @@ import ReactDOM from 'react-dom';
 import * as React from 'react';
 import {Provider} from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router'
+import { ConnectedRouter } from 'connected-react-router';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import firebaseConfig from './__sensitive__/firebaseConfig.json';
 
 import * as serviceWorker from './serviceWorker';
 import configureStore, { history } from './createAppStore';
@@ -15,6 +18,8 @@ import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 // @ts-ignore
 export const store = configureStore(window['__INITIAL_STATE__']);
 store.dispatch<any>(start());
+
+firebase.initializeApp(firebaseConfig);
 
 class IndexComponent extends React.Component<any> {
   render() {

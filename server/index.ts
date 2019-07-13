@@ -14,9 +14,9 @@ database.start();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/status', verifyUserMiddleware, status); // TODO: middleware added here for testing purposes. Remove
-app.use('/rooms', rooms);
-app.use('/messages', messages);
+app.use('/status', status);
+app.use('/rooms', verifyUserMiddleware, rooms);
+app.use('/messages', verifyUserMiddleware, messages);
 
 let port = 4000;
 const server = app.listen(port, () => console.log(`Server is up and running on port number ${port}`));

@@ -19,7 +19,13 @@ const DEFAULT_LIMIT = 5;
 export default class RoomApi {
 
   static async getList({ page, limit }: PaginationType = {}) {
-    const response = await fetch(`/rooms/search?page=${page || DEFAULT_PAGE}&limit=${limit || DEFAULT_LIMIT}`);
+    // TODO: create a wrapper around each fetch query to pass the token.
+    const token = localStorage.getItem("token");
+    const response = await fetch(`/rooms/search?page=${page || DEFAULT_PAGE}&limit=${limit || DEFAULT_LIMIT}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     return await response.json();
   }
 

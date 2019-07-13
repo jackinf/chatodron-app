@@ -18,7 +18,7 @@ export async function verifyUserMiddleware(req: Request, res: Response, next: Ne
   const idToken = authorizationHeader.split(' ')[1];
   try {
     await admin.auth().verifyIdToken(idToken);
-    next();
+    return next();
   } catch (err) {
     console.error(err);
     res.sendStatus(401);
