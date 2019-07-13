@@ -6,6 +6,7 @@ import rooms from './routes/room.route';
 import messages from './routes/message.route';
 import database from './database';
 import sockets from './sockets';
+import { verifyUserMiddleware } from './auth';
 
 const app = express();
 
@@ -13,7 +14,7 @@ database.start();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/status', status);
+app.use('/status', verifyUserMiddleware, status); // TODO: middleware added here for testing purposes. Remove
 app.use('/rooms', rooms);
 app.use('/messages', messages);
 

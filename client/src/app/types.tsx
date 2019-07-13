@@ -8,8 +8,8 @@ export interface Config {
 export interface RootDispatchProps {}
 export interface RootStateProps {
   loading: boolean;
+  backendHost: string;
   error?: ErrorWrapper;
-  isLoggedIn: boolean;
 }
 export type RootProps = RootDispatchProps & RootStateProps & WithStyles<typeof styles>;
 

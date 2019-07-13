@@ -17,47 +17,54 @@ import EditRoomRoutes from './routes/EditRoom/async';
 import ChatRoomRoutes from './routes/ChatRoom/async';
 import Footer from './components/Footer/Footer.component';
 import AsyncComponent from './components/AsyncComponent';
-import { AuthConsumer } from './routes/Authentication/AuthContext';
+import { AuthConsumer, AuthProvider } from './routes/Authentication/AuthContext';
 
 function Root(props: RootProps) {
-  const {loading, error, isLoggedIn, classes} = props;
+  const {loading, error, backendHost, classes} = props;
 
   if (loading) {
     return <div className="loader spin"/>;
   }
-  if (isLoggedIn && error) {
+  if (error) {
     return <div>[ERROR] {error.title}: {error.description}</div>;
   }
 
-  return (
-    <div className={`app-main ${!isLoggedIn ? '' : ''}`}>
-      <AuthConsumer>
-        {(loggedIn) => (
+  const loggedInRoutes = (
+    <RestrictedRoute path={`/`} isLoggedIn={true} component={() => (
+      <div className={classes && classes.wrapper}>
+        <Centered>
+          <Header/>
+        </Centered>
+        <span className={classes && classes.mainWrapper}>
+          <Route exact={true} path={'/rooms'} component={AsyncComponent(RoomsRoutes)}/>
           <Switch>
-            {isLoggedIn
-              ? <RestrictedRoute path={`/`} isLoggedIn={isLoggedIn} component={() => (
-                <div className={classes && classes.wrapper}>
-                  <Centered>
-                    <Header/>
-                  </Centered>
-                  <span className={classes && classes.mainWrapper}>
-                <Route exact={true} path={'/rooms'} component={AsyncComponent(RoomsRoutes)}/>
-                <Switch>
-                  <Route exact={true} path={'/rooms/new'} component={AsyncComponent(CreateRoomRoutes)}/>
-                  <Route exact={true} path={'/rooms/:id'} component={AsyncComponent(RoomRoutes)}/>
-                  <Route path={'/rooms/:id/edit'} component={AsyncComponent(EditRoomRoutes)}/>
-                  <Route path={'/rooms/:id/chat'} component={AsyncComponent(ChatRoomRoutes)}/>
-                </Switch>
-              </span>
-                  <span className={classes && classes.footerWrapper}>
-                <Footer/>
-              </span>
-                </div>
-              )}/>
-              : <Route path={'*'} component={asyncComponent(async () => await import('./routes/Authentication/Login'))}/>}
+            <Route exact={true} path={'/rooms/new'} component={AsyncComponent(CreateRoomRoutes)}/>
+            <Route exact={true} path={'/rooms/:id'} component={AsyncComponent(RoomRoutes)}/>
+            <Route path={'/rooms/:id/edit'} component={AsyncComponent(EditRoomRoutes)}/>
+            <Route path={'/rooms/:id/chat'} component={AsyncComponent(ChatRoomRoutes)}/>
           </Switch>
-        )}
-      </AuthConsumer>
+          </span>
+          <span className={classes && classes.footerWrapper}>
+            <Footer/>
+          </span>
+      </div>
+    )}/>
+  );
+
+  const notLoggedInRoutes = <Route path={'*'}
+                                   component={asyncComponent(async () => await import('./routes/Authentication/Login'))}/>;
+
+  return (
+    <div className="app-main">
+      <AuthProvider host={backendHost}>
+        <AuthConsumer>
+          {({loggedIn}) => (
+            <Switch>
+              {loggedIn ? loggedInRoutes : notLoggedInRoutes}
+            </Switch>
+          )}
+        </AuthConsumer>
+      </AuthProvider>
 
       <ReduxToastr
         timeOut={4000}
@@ -73,11 +80,11 @@ function Root(props: RootProps) {
 }
 
 const mapStateToProps = (state: any): RootStateProps => {
-  const currentState: AppReduxState = state[REDUCER_NAME__APP];
+  const {loading, error, config: {backendHost}}: AppReduxState = state[REDUCER_NAME__APP];
   return {
-    loading: currentState.loading,
-    error: currentState.error,
-    isLoggedIn: true, // TODO: implement
+    loading,
+    error,
+    backendHost,
   };
 };
 
