@@ -11,6 +11,18 @@ Define env variable for the MongoDB
 export CHATODRON_MONGODB_URI=""
 ```
 
+Add Firebase service accounts
+
+For client app:
+```
+./client/src/__sensitive__/firebaseConfig.json
+```
+
+For server app:
+```
+./server/__sensitive__/firebaseConfig.json
+```
+
 Start the server app
 ```
 npm run server

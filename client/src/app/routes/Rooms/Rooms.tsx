@@ -32,7 +32,7 @@ function Rooms(props: Props) {
   const { tableData, getList, classes, remove, history } = props;
 
   const handleGoToAddItemPage = () => history.push(roomRoutes.newRoom());
-  const handleRemove = () => remove();
+  const handleRemove = (id: string, callback: Function) => remove(id, callback);
 
   return (
     <>

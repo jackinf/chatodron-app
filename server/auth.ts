@@ -1,7 +1,7 @@
 import admin from 'firebase-admin';
 import { NextFunction, Request, Response } from 'express-serve-static-core';
 
-const serviceAccount = require('./__sensitive__/chatodron-firebase-adminsdk-4u8aq-cf046722d6.json');
+const serviceAccount = require('./__sensitive__/firebaseConfig.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

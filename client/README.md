@@ -1,7 +1,9 @@
-# Client
+# Client App
 
 ## Structure
 
+- actions
+- apis
 - components
 - helpers
-- types
+- routes

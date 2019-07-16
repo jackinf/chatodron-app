@@ -58,7 +58,7 @@ export function submit(id: string, onSuccess: Function) {
       dispatch(submitActions.done({ params: {}, result: {} }));
       toastr.success('Success', 'Item was successfully deleted');
       if (onSuccess) {
-        onSuccess();
+        await onSuccess();
       }
     }
 
